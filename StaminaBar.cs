@@ -9,8 +9,14 @@ public class StaminaBar : MonoBehaviour
     public static StaminaBar Instance {get; set;}
 
     public Slider healthBar;
-    public float maxHealth = 50f;
+    public Slider armorBar;
 
+    public float maxArmorHealth = 50f;
+
+    //..Reference of the Armor Health Points,
+    public float armorHealthPoints = 15.5f;
+
+    public float maxHealth = 50f;
     //..12.5f, 15.5
     public float healthPoints = 15.5f;
 
@@ -30,7 +36,11 @@ public class StaminaBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //..Health Bar
         healthBar.maxValue = maxHealth;
+
+        //..Armor Bar..
+        armorBar.maxValue = maxArmorHealth;
     }
 
     // Update is called once per frame
@@ -39,10 +49,24 @@ public class StaminaBar : MonoBehaviour
         
     }
 
+    public void GrantArmorHealth()
+    {
+        maxArmorHealth = maxArmorHealth + armorHealthPoints;
+
+        //..Updating Armor Bar Health Slide Bar
+        armorBar.value = maxArmorHealth;
+
+        if (maxArmorHealth >= 50f)
+        {
+            armorBar.value = maxArmorHealth;
+        }
+    }
+
     public void GrantHealth()
     {
         maxHealth = maxHealth + healthPoints;
 
+      
         //..Updating Health Bar Slider Bar..
         healthBar.value = maxHealth;
 
@@ -70,6 +94,7 @@ public class StaminaBar : MonoBehaviour
 
     public void attackingPlayer()
     {
+        /*
         maxHealth = maxHealth - enemyDamage;
 
         //Updating Health Slider..
@@ -80,6 +105,31 @@ public class StaminaBar : MonoBehaviour
 
             //..Load Game Menu
             RestartLevel.Instance.showingRestartMenu();
+        }
+        */
+
+
+        //..First check on Armor Bar
+        if(maxArmorHealth > 0)
+        {
+            maxArmorHealth = maxArmorHealth - enemyDamage;
+
+            //..Update the Armor Bar
+            armorBar.value = maxArmorHealth;
+           
+        }
+
+        if (maxArmorHealth <= 0)
+        {
+            maxHealth = maxHealth - enemyDamage;
+
+            //..Updating Health Bar..
+            healthBar.value = maxHealth;
+
+            if(maxHealth <=0)
+            {
+                RestartLevel.Instance.showingRestartMenu();
+            }
         }
     }
 

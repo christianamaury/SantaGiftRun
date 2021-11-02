@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameM : MonoBehaviour
@@ -34,6 +35,8 @@ public class GameM : MonoBehaviour
     public void Awake()
     {
         Instance = this;
+
+        
 
     }
 
@@ -149,6 +152,43 @@ public class GameM : MonoBehaviour
             //bestScoreCount.text = score.ToString();
 
             bestScoreTransfer.text = PlayerPrefs.GetInt("BestScore", 0).ToString();
+
         }
+        
     }
+
+    public void tikTokProfile()
+    {
+       
+        MainMenu.Instance.socialMediaLink();
+    }
+
+    public void displayInfoScreenPanel()
+    {
+        //MainMenu.Instance.displayInfoMenu();
+    }
+
+    public void QuitGame()
+    {
+    
+        MainMenu.Instance.quitGame();
+    }
+
+    public void backToMainScreenMenu()
+    {
+        //..Play UI Sound
+        FindObjectOfType<AudioManager>().Play("Click");
+
+        //..Loading Scene
+        SceneManager.LoadScene(1);
+        Time.timeScale = 1;
+    }
+
+    public void seeOurGames()
+    {
+      
+        MainMenu.Instance.checkOurGames();
+    }
+
+
 }

@@ -14,7 +14,7 @@ public class RestartLevel : MonoBehaviour
 
     //Reference of the Game Object Canvas..
     public GameObject restartCanvasObject;
-
+   
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +33,7 @@ public class RestartLevel : MonoBehaviour
 
         //Turn off the UI Canvas when the game starts..
         restartCanvasObject.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -44,6 +45,12 @@ public class RestartLevel : MonoBehaviour
     {
         //Disabled Score Textin the Game..Mainone
         GameM.Instance.scoreCount.gameObject.SetActive(false);
+
+        //..Disabled Coins Image..
+        CurrencySystem.Instance.coinsImageGameObject.SetActive(false);
+        CurrencySystem.Instance.coinsText.gameObject.SetActive(false);
+
+        //CurrencySystem.Instance.coinsTextTransfer.gameObject.SetActive(false);
 
         //Calling Randomizer IntertitialsAds nethod.
         randomInterestialAdsShow();

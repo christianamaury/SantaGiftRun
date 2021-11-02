@@ -18,7 +18,14 @@ public class AudioManager : MonoBehaviour
             Instance = this;
         }
         //..If not, we're already have one destroy it.. 
-        else {Destroy(gameObject); return;}
+        else
+        {
+            Destroy(gameObject); return;
+        }
+
+        //..When Loading into a new Scene don't destroy this game object
+        DontDestroyOnLoad(gameObject);
+
 
         //..For each sounds in the array.. add a component
         foreach(Sounds s in sounds)

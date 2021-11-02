@@ -58,8 +58,7 @@ public class EController : MonoBehaviour
         {
                  attackingAnimation();
                 //Damage on the player..
-                StaminaBar.Instance.attackingPlayer();
-            
+                StaminaBar.Instance.attackingPlayer();   
         }
     }
 
@@ -70,7 +69,5 @@ public class EController : MonoBehaviour
             stoppingAttackAnimation();
         }
     }
-
-
 
 }

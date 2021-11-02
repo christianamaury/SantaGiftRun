@@ -36,6 +36,9 @@ public class AdsManager : MonoBehaviour
     {
         Instance = this;
 
+        //..When Loading another Scene, don't delete this gameObject
+        DontDestroyOnLoad(gameObject);
+
         #if UNITY_IOS
         //..Initialize app ID..
         MobileAds.Initialize(appID);
