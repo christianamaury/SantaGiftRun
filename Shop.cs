@@ -10,8 +10,8 @@ public class Shop : MonoBehaviour
 
     //..Coins TextMesh Pro Object
     public TextMeshProUGUI coinsText;
-    public TextMeshProUGUI healtPotionsCount;
-    public TextMeshProUGUI armorPotionsCount;
+    //public TextMeshProUGUI healtPotionsCount;
+    //public TextMeshProUGUI armorPotionsCount;
     
 
     //..Once the coin has been picked up
@@ -39,61 +39,71 @@ public class Shop : MonoBehaviour
         coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
 
         //..Health Potions Available
-        healtPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
+        //healtPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
 
         //..Armor Potions Available..
-        armorPotionsCount.text = PlayerPrefs.GetInt("ArmorPotions", 0).ToString();
+        //armorPotionsCount.text = PlayerPrefs.GetInt("ArmorPotions", 0).ToString();
     }
 
 
 
     public void BuyHealthPotions()
     {
-        if (PlayerPrefs.GetInt("Currency", 0) >= 300)
+
+        //..Needs to be 300, testing purposes 20
+        if (PlayerPrefs.GetInt("Currency", 0) >= 20)
         {
             currentCoinsAvailable = PlayerPrefs.GetInt("Currency", 0);
 
             //..Taking some Coins Off from it
-            currentCoinsAvailable = currentCoinsAvailable - 300;
+            currentCoinsAvailable = currentCoinsAvailable - 20;
 
             //..Setting Currency.
             PlayerPrefs.SetInt("Currency", currentCoinsAvailable);
 
+            CurrencySystem.Instance.healthCount = PlayerPrefs.GetInt("HealthPotions", 0);
+
             //..Adding Health Potions..
-            healthCount = healthCount + 3;
+            CurrencySystem.Instance.healthCount = CurrencySystem.Instance.healthCount + 3;
 
             //..Saving these Health Potions in the System
-            PlayerPrefs.SetInt("HealthPotions", healthCount);
+            PlayerPrefs.SetInt("HealthPotions", CurrencySystem.Instance.healthCount);
+            CurrencySystem.Instance.healthCount = PlayerPrefs.GetInt("HealthPotions");
 
             //..Updating our Text Count Layer.. 
-            healtPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
+            //healtPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
 
             //..Updating TextMesh Object
             coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
 
+            
         }
     }
 
     public void BuyArmorHealthPotions()
     {
-        if (PlayerPrefs.GetInt("Currency", 0) >= 300)
+        if (PlayerPrefs.GetInt("Currency", 0) >= 20)
         {
             currentCoinsAvailable = PlayerPrefs.GetInt("Currency", 0);
 
             //..Taking some Coins Off from it
-            currentCoinsAvailable = currentCoinsAvailable - 300;
+            currentCoinsAvailable = currentCoinsAvailable - 20;
 
             //..Setting Currency.
             PlayerPrefs.SetInt("Currency", currentCoinsAvailable);
 
-            //..Adding Health Potions..
-            armorCount = armorCount + 3;
+            CurrencySystem.Instance.armorCount = PlayerPrefs.GetInt("ArmorPotions", 0);
 
-            //..Saving these Health Potions in the System
-            PlayerPrefs.SetInt("ArmorPotions", armorCount);
+            //..Adding Armor Potions..
+            CurrencySystem.Instance.armorCount = CurrencySystem.Instance.armorCount + 3;
+
+            //..Saving these Armor  Potions in the System
+            PlayerPrefs.SetInt("ArmorPotions", CurrencySystem.Instance.armorCount);
+
+            CurrencySystem.Instance.armorCount = PlayerPrefs.GetInt("ArmorPotions");
 
             //..Updating our Text Count Layer.. 
-            armorPotionsCount.text = PlayerPrefs.GetInt("ArmorPotions", 0).ToString();
+            //armorPotionsCount.text = PlayerPrefs.GetInt("ArmorPotions", 0).ToString();
 
             //..Updating TextMesh Object
             coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";

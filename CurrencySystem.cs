@@ -10,15 +10,16 @@ public class CurrencySystem : MonoBehaviour
 
     //..Coins TextMesh Pro Object
     public TextMeshProUGUI coinsText;
-    public TextMeshProUGUI potionsTextCount;
-    public TextMeshProUGUI armorPotionsTextCount;
+    //public TextMeshProUGUI potionsTextCount;
+    //public TextMeshProUGUI armorPotionsTextCount;
     public TextMeshProUGUI coinsTextTransfer;
-    public TextMeshProUGUI healtPotionsCount;
-    public TextMeshProUGUI armorPotionsCount;
+    public TextMeshProUGUI healthPotionsCount;
+    public TextMeshProUGUI armorPotionsTextCount;
     public GameObject coinsImageGameObject;
 
     //..Once the coin has been picked up
     public int coinsPickUp = 0;
+    public int armorCount = 0;
     public int currentCoinsAvailable;
 
     //..Armor and Health Points Count..
@@ -41,8 +42,10 @@ public class CurrencySystem : MonoBehaviour
         coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
 
         //..Health Potions Available
-        healtPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
+        healthPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
 
+        //..Armor Potions Available
+        armorPotionsTextCount.text = PlayerPrefs.GetInt("ArmorPotions", 0).ToString();
 
 
     }
@@ -83,13 +86,15 @@ public class CurrencySystem : MonoBehaviour
             PlayerPrefs.SetInt("Currency", currentCoinsAvailable);
 
             //..Adding Health Potions..
+            healthCount = PlayerPrefs.GetInt("HealthPotions", 0);
+
             healthCount = healthCount + 3;
 
             //..Saving these Health Potions in the System
             PlayerPrefs.SetInt("HealthPotions", healthCount);
 
             //..Updating our Text Count Layer.. 
-            healtPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
+            healthPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
 
             //..Updating TextMesh Object
             coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";

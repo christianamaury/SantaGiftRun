@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 
 public class MainMenu : MonoBehaviour
@@ -19,7 +20,10 @@ public class MainMenu : MonoBehaviour
     public GameObject tiktokButton;
     public GameObject rewardsVideoButton;
     public GameObject infoButton;
-    public GameObject storeGameButtton; 
+    public GameObject storeGameButtton;
+
+    //..Coins Reference
+    //public TextMeshProUGUI availableCurrency; 
 
 
 
@@ -33,6 +37,9 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         infoPanelGameObject.SetActive(false);
+        storePanelGameObject.SetActive(false);
+
+        //availableCurrency.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
     }
 
     public void startGame()
@@ -49,6 +56,27 @@ public class MainMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    public void ShopMenu()
+    {
+        //..Putting Sounds here
+        FindObjectOfType<AudioManager>().Play("Click");
+
+        storePanelGameObject.SetActive(true);
+
+        //.Turning off the info panel
+        
+        infoButton.SetActive(false);
+        playGameButton.SetActive(false);
+        quitGameButton.SetActive(false);
+        storeGameButtton.SetActive(false);
+        infoButton.SetActive(false);
+        noAdsButton.SetActive(false);
+        leaderboardButton.SetActive(false);
+        rewardsVideoButton.SetActive(false);
+        tiktokButton.SetActive(false);
 
     }
 
@@ -77,7 +105,7 @@ public class MainMenu : MonoBehaviour
         infoButton.SetActive(false);
         storeGameButtton.SetActive(false);
         rewardsVideoButton.SetActive(false);
-    
+        storePanelGameObject.SetActive(false);
     }
 
     public void backToMainMenu()
@@ -96,6 +124,8 @@ public class MainMenu : MonoBehaviour
         leaderboardButton.SetActive(true);
         rewardsVideoButton.SetActive(true);
         tiktokButton.SetActive(true);
+        storePanelGameObject.SetActive(false);
+
 
     }
 
