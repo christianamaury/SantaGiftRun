@@ -10,6 +10,7 @@ public class GiftRespawn : MonoBehaviour
 
     private int countGifts;
 
+    //..0.352f / 0.5
     private int xGiftPosition;
     private int zGiftPosition;
     private float yGiftPosition = 0.352f;
