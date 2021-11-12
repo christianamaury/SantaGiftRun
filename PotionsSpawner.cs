@@ -45,7 +45,7 @@ public class PotionsSpawner : MonoBehaviour
 
             //..Instantiate the GameObject..
             Instantiate(randomObject, new Vector3(xPotionsPosition, yPotionsPotion, zPotionsPosition), Quaternion.identity);
-            yield return new WaitForSeconds(1.95f);
+            yield return new WaitForSeconds(1.97f);
 
             potionsCount = potionsCount + 1;
 

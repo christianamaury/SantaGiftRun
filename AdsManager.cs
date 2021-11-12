@@ -41,12 +41,13 @@ public class AdsManager : MonoBehaviour
 
         #if UNITY_IOS
         //..Initialize app ID..
-        MobileAds.Initialize(appID);
+        MobileAds.Initialize(init => { });
         #endif
 
         #if UNITY_ANDROID
         //..Initialize app ID for Android Devices..
-        MobileAds.Initialize(appAndroidID);
+        MobileAds.Initialize(init => { });
+
         #endif
     }
     // Start is called before the first frame update
