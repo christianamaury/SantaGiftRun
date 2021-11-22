@@ -23,25 +23,34 @@ public class RedHScore : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider col)
+    private void OnTriggerStay(Collider col)
     {
-        if(col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player")
         {
-            //..Honoring life on the player
-            StaminaBar.Instance.GrantHealth();
-
             if(GameM.Instance.redGiftSCounts > 0)
             {
+                //..Honoring life on the player
+                StaminaBar.Instance.GrantHealth();
+
                 //..Playing santa special sound
                 AudioManager.Instance.Play("MerryChristmas");
+
                 //..Saving Actual Score
                 GameM.Instance.savingActualScore();
 
                 GameM.Instance.scoreCount.text = GameM.Instance.score.ToString();
-                GameM.Instance.redGiftSCounts = GameM.Instance.redGiftSCounts - 1;
-                GameM.Instance.redGiftCount.text = GameM.Instance.redGiftSCounts.ToString();
 
-            }
+                GameM.Instance.redGiftSCounts = GameM.Instance.redGiftSCounts - 1;
+
+                //..This will fix UI Text Count Bug;
+                CurrencySystem.Instance.healthCount = PlayerPrefs.GetInt("HealthPotions", 0);
+                CurrencySystem.Instance.healthCount += 1;
+                PlayerPrefs.SetInt("HealthPotions", CurrencySystem.Instance.healthCount);
+                CurrencySystem.Instance.healthPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
+
+                GameM.Instance.redGiftCount.text = GameM.Instance.redGiftSCounts.ToString();
+                
+            }   
         }
     }
 }

@@ -35,7 +35,8 @@ public class PotionsSpawner : MonoBehaviour
 
     IEnumerator RespawnPotions()
     {
-        while (potionsCount < 2)
+        //..Previous sly 
+        while (potionsCount < 1)
         {
             xPotionsPosition = Random.Range(-14, 14);
             zPotionsPosition = Random.Range(-13, 13);
@@ -45,11 +46,11 @@ public class PotionsSpawner : MonoBehaviour
 
             //..Instantiate the GameObject..
             Instantiate(randomObject, new Vector3(xPotionsPosition, yPotionsPotion, zPotionsPosition), Quaternion.identity);
-            yield return new WaitForSeconds(1.97f);
+            yield return new WaitForSeconds(14.86f);
 
             potionsCount = potionsCount + 1;
 
-            if (potionsCount == 3)
+            if (potionsCount == 1)
             {
                 potionsCount = 0;
             }

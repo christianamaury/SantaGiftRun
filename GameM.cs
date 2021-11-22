@@ -16,6 +16,8 @@ public class GameM : MonoBehaviour
     public TextMeshProUGUI yellowGiftCount;
     public TextMeshProUGUI blueGiftCount;
 
+
+
     //Score Count & Best Score Count..
     public TextMeshProUGUI scoreCount;
 
@@ -51,6 +53,7 @@ public class GameM : MonoBehaviour
         scoreCount.text = score.ToString();
         //bestScoreCount.text = PlayerPrefs.GetInt("BestScore", 0).ToString();
         bestScoreTransfer.text = PlayerPrefs.GetInt("BestScore", 0).ToString();
+
         /*
          *OLD STUFF
         //..Initialize Current Counts of the Gifts
@@ -148,9 +151,10 @@ public class GameM : MonoBehaviour
             //..Saving the count
             PlayerPrefs.SetInt("BestScore", score);
 
-            //..Updating the actual Best Score..
-            //bestScoreCount.text = score.ToString();
+            //..Saving Bestscore into the Leaderboard;
+            CloudOnceServices.Instance.SubmitScoreToLeaderboard(score);
 
+            //..Transferring BestScore, Updating it;
             bestScoreTransfer.text = PlayerPrefs.GetInt("BestScore", 0).ToString();
 
         }

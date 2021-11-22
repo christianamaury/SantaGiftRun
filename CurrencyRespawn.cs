@@ -40,11 +40,11 @@ public class CurrencyRespawn : MonoBehaviour
 
             //..Instantiate the GameObject
             Instantiate(Currency, new Vector3(xCurrencyPosition, yCurrencyPosition, zCurrencyPosition), Quaternion.identity);
-            yield return new WaitForSeconds(1.97f);
+            yield return new WaitForSeconds(2.97f);
 
             currencyCount = currencyCount + 1;
 
-            if(currencyCount == 3)
+            if(currencyCount == 2)
             {
                 currencyCount = 0;
             }

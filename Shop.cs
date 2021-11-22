@@ -51,12 +51,12 @@ public class Shop : MonoBehaviour
     {
 
         //..Needs to be 300, testing purposes 20
-        if (PlayerPrefs.GetInt("Currency", 0) >= 20)
+        if (PlayerPrefs.GetInt("Currency", 0) >= 300)
         {
             currentCoinsAvailable = PlayerPrefs.GetInt("Currency", 0);
 
             //..Taking some Coins Off from it
-            currentCoinsAvailable = currentCoinsAvailable - 20;
+            currentCoinsAvailable = currentCoinsAvailable - 300;
 
             //..Setting Currency.
             PlayerPrefs.SetInt("Currency", currentCoinsAvailable);
@@ -76,18 +76,17 @@ public class Shop : MonoBehaviour
             //..Updating TextMesh Object
             coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
 
-            
         }
     }
 
     public void BuyArmorHealthPotions()
     {
-        if (PlayerPrefs.GetInt("Currency", 0) >= 20)
+        if (PlayerPrefs.GetInt("Currency", 0) >= 300)
         {
             currentCoinsAvailable = PlayerPrefs.GetInt("Currency", 0);
 
             //..Taking some Coins Off from it
-            currentCoinsAvailable = currentCoinsAvailable - 20;
+            currentCoinsAvailable = currentCoinsAvailable - 300;
 
             //..Setting Currency.
             PlayerPrefs.SetInt("Currency", currentCoinsAvailable);
@@ -108,6 +107,65 @@ public class Shop : MonoBehaviour
             //..Updating TextMesh Object
             coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
 
+        }
+    }
+
+    public void BuyMinimumCoins()
+    {
+        if (IAPurchase.Instance.minimumCoinsBool == true)
+        {
+            int coinsAvailable = PlayerPrefs.GetInt("Currency", 0);
+
+            //rewardedCoins = (int)amount;
+            coinsAvailable = coinsAvailable + 340;
+
+            //..Availble coins now
+            PlayerPrefs.SetInt("Currency", coinsAvailable);
+
+            //..Updating Coins Text;
+            coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
+
+            IAPurchase.Instance.minimumCoinsBool = false;
+
+        }
+    }
+
+    public void BuyMediumCoins()
+    {
+
+        if (IAPurchase.Instance.mediumCoinsBool == true)
+        {
+            int coinsAvailable = PlayerPrefs.GetInt("Currency", 0);
+
+            //rewardedCoins = (int)amount;
+            coinsAvailable = coinsAvailable + 640;
+
+            //..Availble coins now
+            PlayerPrefs.SetInt("Currency", coinsAvailable);
+
+            //..Updating Coins Text;
+            coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
+
+            IAPurchase.Instance.mediumCoinsBool = false;
+        }
+    }
+
+    public void BuyLargeCoins()
+    {
+        if (IAPurchase.Instance.largeCoinsBool == true)
+        {
+            int coinsAvailable = PlayerPrefs.GetInt("Currency", 0);
+
+            //rewardedCoins = (int)amount;
+            coinsAvailable = coinsAvailable + 1150;
+
+            //..Availble coins now
+            PlayerPrefs.SetInt("Currency", coinsAvailable);
+
+            //..Updating Coins Text;
+            coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
+
+            IAPurchase.Instance.largeCoinsBool = false;
         }
     }
 

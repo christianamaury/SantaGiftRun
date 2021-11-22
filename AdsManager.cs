@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 using GoogleMobileAds.Api;
+using GoogleMobileAds.Common;
 
 //For Event Handlers..
 using System;
@@ -18,26 +19,36 @@ public class AdsManager : MonoBehaviour
 
     //InterestialAd..
     private string interestialAdsUnit = "ca-app-pub-3187572158588519/3114919207";
+
+    //..Rewards VideoAdUnit
+    private string rewardVideoAds = "RewardsVideoca-app-pub-3187572158588519/6632579779";
+
+    //..Test AdsUnit
     private string testAds = "ca-app-pub-3940256099942544/2934735716";
 
+    public int rewardedCoins = 0;
 
-
+ 
     //AppID.., Android Device
     private string appAndroidID = "ca-app-pub-3187572158588519~9232770848";
     //Android Banner ID..
     private string androidBannerID = "ca-app-pub-3187572158588519/5403182951";
     //Android Interestial Ads..
     private string androidInterestialAds = "ca-app-pub-3187572158588519/7781100136";
+    //..Android RewardsVideoAds
+    private string androidRewardVideoAds = "ca-app-pub-3187572158588519/7676206317";
 
     private BannerView bannerView;
     private InterstitialAd interestialAds;
+    private RewardedAd rewardedAd;
 
     private void Awake()
+
     {
         Instance = this;
 
         //..When Loading another Scene, don't delete this gameObject
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         #if UNITY_IOS
         //..Initialize app ID..
@@ -52,10 +63,19 @@ public class AdsManager : MonoBehaviour
     }
     // Start is called before the first frame update
     void Start()
-    { 
-        //..Calling those Banners and Interestials Request
-        this.requestBanner();
-        this.requestingVideoAds();
+    {
+
+        if(IAPurchase.Instance.removeAllAds_IAP == false)
+        {
+            Debug.Log("Calling ads down here");
+
+            //..Calling those Banners,Interestials and Rewarded Video Request
+            this.requestBanner();
+            this.requestingVideoAds();
+            this.requestRewardedVideoAds();
+        }
+
+     
     }
 
     // Update is called once per frame
@@ -84,6 +104,26 @@ public class AdsManager : MonoBehaviour
         bannerView.LoadAd(request);
         #endif
     }
+
+    public void requestRewardedVideoAds()
+    {
+        #if UNITY_IOS
+        this.rewardedAd = new RewardedAd(rewardVideoAds);
+        //..Creating an empty AdRequest
+        AdRequest request = new AdRequest.Builder().Build();
+        //..Loading the Rewarded ad with the request;
+        this.rewardedAd.LoadAd(request);
+        #endif
+
+        #if UNITY_ANDROID
+        this.rewardedAd = new RewardedAd(androidRewardVideoAds);
+        //..Creating an empty AdRequest
+        AdRequest request = new AdRequest.Builder().Build();
+        //..Loading the Rewarded ad with the request;
+        this.rewardedAd.LoadAd(request);
+        #endif
+    }
+
     public void requestingVideoAds()
     {
         #if UNITY_IOS
@@ -104,7 +144,19 @@ public class AdsManager : MonoBehaviour
         //Load the interestial with the request..
         this.interestialAds.LoadAd(request);
         #endif
+    }
 
+    public void showingRewardedVideoAds()
+    {
+        if (this.rewardedAd.IsLoaded())
+        {
+            this.rewardedAd.Show();
+        }
+
+        else {Debug.Log("Rewarded Video aren't ready to load up yet");}
+
+        //..Rewarded Video Ads Behaviour
+        this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
     }
 
     public void showingInterestialAds()
@@ -141,5 +193,30 @@ public class AdsManager : MonoBehaviour
     public void HandleOnAdLeavingApplication (object sender, EventArgs args)
     {
 
+    }
+
+    //..Called when the user should be rewarded for interacting with the ad.. 
+    public void HandleUserEarnedReward(object sender, Reward args)
+    {
+        //string type = args.Type;
+
+        double amount = args.Amount;
+
+        int coinsAvailable = PlayerPrefs.GetInt("Currency", 0);
+        rewardedCoins = (int)amount;
+        coinsAvailable = coinsAvailable + rewardedCoins;
+
+        //..Availble coins now
+        PlayerPrefs.SetInt("Currency", coinsAvailable);
+
+        //..Updating Coins Text;
+        Shop.Instance.coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
+
+
+        /*
+        MonoBehaviour.print(
+            "HandleRewardedAdRewarded event received for "
+                        + amount.ToString() + " " + type);
+        */
     }
 }

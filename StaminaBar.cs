@@ -16,17 +16,17 @@ public class StaminaBar : MonoBehaviour
     //..Reference of the Armor Health Points,
     public float armorHealthPoints = 15.5f;
 
-    public float maxHealth = 50f;
+    public float maxHealth = 100f;
     //..12.5f, 15.5
     public float healthPoints = 15.5f;
 
-    //Previosly., 5 - 2.2, 1.7f, 0.9f, 0.4
+    //Previosly., 5 - 2.2, 1.7f, 0.9f, 0.4, 0.01
     public float damagePerWalk = 0.1f;
-    public float testingDamage = 0.1f;
+    public float testingDamage = 0.02f;
 
     //..2.3f 2.1, 1.3f (pero lo cambio porque use OnTriggerEnter)
     //..Ahora como arregle bug y puse OnTrigger enter en el enemy class, baja el damage
-    public float enemyDamage = 0.1f;
+    public float enemyDamage = 0.01f;
 
     private void Awake()
     {

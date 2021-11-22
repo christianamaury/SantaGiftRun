@@ -13,13 +13,16 @@ public class IAPurchase : MonoBehaviour, IStoreListener
     private static IExtensionProvider m_StoreExtensionProvider;
 
     //..Products, so far only remove Ads
-    private string removeAllAds = "Remove_Ads";
-    private string minimumCoins = "300 Coins";
-    private string mediumCoins = "640 Coins";
-    private string largeCoins = "1,150 Coins";
+    private string removeAllAds = "Remove_Ads_SantaGiftRun";
+    private string minimumCoins = "300_Coins";
+    private string mediumCoins = "640_Coins";
+    private string largeCoins = "1150_Coins";
 
 
     public bool removeAllAds_IAP = false;
+    public bool minimumCoinsBool = false;
+    public bool mediumCoinsBool = false;
+    public bool largeCoinsBool = false;
 
     private void Awake()
     {
@@ -76,9 +79,11 @@ public class IAPurchase : MonoBehaviour, IStoreListener
 
         if (String.Equals(args.purchasedProduct.definition.id, minimumCoins, StringComparison.Ordinal))
         {
-            Debug.Log("Player just bought 300 Coins!");
+            Debug.Log("Player just bought 340 Coins!");
 
-          //..Add coins down here..
+            //..Add coins down here..
+            minimumCoinsBool = true;
+            Shop.Instance.BuyMinimumCoins();
           
         }
         else
@@ -91,6 +96,8 @@ public class IAPurchase : MonoBehaviour, IStoreListener
             Debug.Log("Player just bought 640 Coins!");
 
             //..Add coins down here..
+            mediumCoinsBool = true;
+            Shop.Instance.BuyMediumCoins();
 
         }
         if (String.Equals(args.purchasedProduct.definition.id, largeCoins, StringComparison.Ordinal))
@@ -98,7 +105,8 @@ public class IAPurchase : MonoBehaviour, IStoreListener
             Debug.Log("Player just bought 1,150 Coins!");
 
             //..Add coins down here..
-
+            largeCoinsBool = true;
+            Shop.Instance.BuyLargeCoins();
         }
 
         else

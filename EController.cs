@@ -10,6 +10,8 @@ public class EController : MonoBehaviour
     private Transform playerTransform;
     private Animator anim;
 
+    public bool isDamaging = false;
+
     private void Awake()
     {
         Instance = this;
@@ -54,11 +56,17 @@ public class EController : MonoBehaviour
 
     public void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player")
         {
-                 attackingAnimation();
+            isDamaging = true;
+            if(isDamaging == true)
+            {
+                attackingAnimation();
                 //Damage on the player..
-                StaminaBar.Instance.attackingPlayer();   
+                StaminaBar.Instance.attackingPlayer();
+                isDamaging = false;
+            }
+
         }
     }
 
@@ -66,6 +74,7 @@ public class EController : MonoBehaviour
     {
         if(col.gameObject.tag == "Player")
         {
+            isDamaging = false;
             stoppingAttackAnimation();
         }
     }
