@@ -18,6 +18,8 @@ public class IAPurchase : MonoBehaviour, IStoreListener
     private string mediumCoins = "640_Coins";
     private string largeCoins = "1150_Coins";
 
+    //..Using this variable to check if the customer paid to remove all Ads.
+    private int NoAds = 0;
 
     public bool removeAllAds_IAP = false;
     public bool minimumCoinsBool = false;
@@ -69,9 +71,11 @@ public class IAPurchase : MonoBehaviour, IStoreListener
             Debug.Log("All Ads has been removed.");
 
             //..Bool is now true, User removed all Ads.
-            //Bottle.Instance.removeAllAds_IAP = true;
             removeAllAds_IAP = true;
+            int NoAds = 1;
+            PlayerPrefs.SetInt("NoAds", NoAds);
         }
+
         else
         {
             Debug.Log("Purchased has failed. Please try again.");
@@ -82,21 +86,20 @@ public class IAPurchase : MonoBehaviour, IStoreListener
             Debug.Log("Player just bought 340 Coins!");
 
             //..Add coins down here..
-            minimumCoinsBool = true;
             Shop.Instance.BuyMinimumCoins();
-          
         }
+
         else
         {
             Debug.Log("Purchased has failed. Please try again.");
+           
         }
 
         if (String.Equals(args.purchasedProduct.definition.id, mediumCoins, StringComparison.Ordinal))
         {
             Debug.Log("Player just bought 640 Coins!");
 
-            //..Add coins down here..
-            mediumCoinsBool = true;
+            //..Adding Coins;
             Shop.Instance.BuyMediumCoins();
 
         }
@@ -104,14 +107,14 @@ public class IAPurchase : MonoBehaviour, IStoreListener
         {
             Debug.Log("Player just bought 1,150 Coins!");
 
-            //..Add coins down here..
-            largeCoinsBool = true;
+            //..Adding Coins;
             Shop.Instance.BuyLargeCoins();
         }
 
         else
         {
             Debug.Log("Purchased has failed. Please try again.");
+       
         }
 
         return PurchaseProcessingResult.Complete;
@@ -186,6 +189,7 @@ public class IAPurchase : MonoBehaviour, IStoreListener
         // If we are running on an Apple device ... 
         if (Application.platform == RuntimePlatform.IPhonePlayer ||
             Application.platform == RuntimePlatform.OSXPlayer)
+
         {
             // ... begin restoring purchases
             Debug.Log("RestorePurchases started ...");
@@ -198,8 +202,15 @@ public class IAPurchase : MonoBehaviour, IStoreListener
                 // The first phase of restoration. If no more responses are received on ProcessPurchase then 
                 // no purchases are available to be restored.
                 Debug.Log("RestorePurchases continuing: " + result + ". If no further messages, no purchases available to restore.");
+
+
+                //..Restoring Previous Purchases; Custom Method.
+                customerTransaction();
+
             });
         }
+
+
         // Otherwise ...
         else
         {
@@ -222,6 +233,9 @@ public class IAPurchase : MonoBehaviour, IStoreListener
         m_StoreController = controller;
         // Store specific subsystem, for accessing device-specific store features.
         m_StoreExtensionProvider = extensions;
+
+        //..Custom Method:
+        customerTransaction();
     }
 
 
@@ -239,5 +253,22 @@ public class IAPurchase : MonoBehaviour, IStoreListener
         Debug.Log(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
     }
 
+    public void customerTransaction()
+    {
+        if(m_StoreController != null)
+        {
+           if(m_StoreController.products.WithID(removeAllAds).hasReceipt)
+            {
+                //..Player already removed all Ads from the Game. 
+                removeAllAds_IAP = true;
+                if(removeAllAds_IAP == true)
+                {
+                    //..Already bought it, remove all Ads;
+                    PlayerPrefs.SetInt("NoAds", 1);
+                }
+            }
+        }
+
+    }
 
 }

@@ -7,7 +7,6 @@ public class Shop : MonoBehaviour
 {
     public static Shop Instance { get; set; }
 
-
     //..Coins TextMesh Pro Object
     public TextMeshProUGUI coinsText;
     //public TextMeshProUGUI healtPotionsCount;
@@ -37,15 +36,7 @@ public class Shop : MonoBehaviour
     {
         //..Getting your coins Reference..
         coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
-
-        //..Health Potions Available
-        //healtPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
-
-        //..Armor Potions Available..
-        //armorPotionsCount.text = PlayerPrefs.GetInt("ArmorPotions", 0).ToString();
     }
-
-
 
     public void BuyHealthPotions()
     {
@@ -69,9 +60,6 @@ public class Shop : MonoBehaviour
             //..Saving these Health Potions in the System
             PlayerPrefs.SetInt("HealthPotions", CurrencySystem.Instance.healthCount);
             CurrencySystem.Instance.healthCount = PlayerPrefs.GetInt("HealthPotions");
-
-            //..Updating our Text Count Layer.. 
-            //healtPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
 
             //..Updating TextMesh Object
             coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
@@ -100,78 +88,41 @@ public class Shop : MonoBehaviour
             PlayerPrefs.SetInt("ArmorPotions", CurrencySystem.Instance.armorCount);
 
             CurrencySystem.Instance.armorCount = PlayerPrefs.GetInt("ArmorPotions");
-
-            //..Updating our Text Count Layer.. 
-            //armorPotionsCount.text = PlayerPrefs.GetInt("ArmorPotions", 0).ToString();
-
             //..Updating TextMesh Object
             coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
-
         }
     }
 
     public void BuyMinimumCoins()
     {
-        if (IAPurchase.Instance.minimumCoinsBool == true)
-        {
             int coinsAvailable = PlayerPrefs.GetInt("Currency", 0);
-
             //rewardedCoins = (int)amount;
             coinsAvailable = coinsAvailable + 340;
-
             //..Availble coins now
             PlayerPrefs.SetInt("Currency", coinsAvailable);
-
             //..Updating Coins Text;
-            coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
-
-            IAPurchase.Instance.minimumCoinsBool = false;
-
-        }
+            coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";  
     }
 
     public void BuyMediumCoins()
     {
-
-        if (IAPurchase.Instance.mediumCoinsBool == true)
-        {
             int coinsAvailable = PlayerPrefs.GetInt("Currency", 0);
-
             //rewardedCoins = (int)amount;
             coinsAvailable = coinsAvailable + 640;
-
             //..Availble coins now
             PlayerPrefs.SetInt("Currency", coinsAvailable);
-
             //..Updating Coins Text;
             coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
-
-            IAPurchase.Instance.mediumCoinsBool = false;
-        }
     }
 
     public void BuyLargeCoins()
     {
-        if (IAPurchase.Instance.largeCoinsBool == true)
-        {
             int coinsAvailable = PlayerPrefs.GetInt("Currency", 0);
-
             //rewardedCoins = (int)amount;
             coinsAvailable = coinsAvailable + 1150;
-
             //..Availble coins now
             PlayerPrefs.SetInt("Currency", coinsAvailable);
-
             //..Updating Coins Text;
             coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
-
-            IAPurchase.Instance.largeCoinsBool = false;
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

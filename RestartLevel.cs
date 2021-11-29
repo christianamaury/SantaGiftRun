@@ -20,7 +20,7 @@ public class RestartLevel : MonoBehaviour
     void Start()
     {
         playerDiedNumber = 2;
-        playerDiedRandom = Random.Range(1, 5);
+        playerDiedRandom = Random.Range(1, 4);
        
         //..Game will be active every single time we start the game
         Time.timeScale = 1;
@@ -64,16 +64,15 @@ public class RestartLevel : MonoBehaviour
         //Pausing game.. 
         Time.timeScale = 0;
     }
+
     public void restartingActualLevel()
     {
-        
 
         restartCanvasObject.SetActive(false);
         Time.timeScale = 1;
 
         //Re-loading current screen..
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
 
     }
 

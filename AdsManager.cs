@@ -64,8 +64,9 @@ public class AdsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        int NoAdsReference = PlayerPrefs.GetInt("NoAds", 0);
 
-        if(IAPurchase.Instance.removeAllAds_IAP == false)
+        if(IAPurchase.Instance.removeAllAds_IAP == false || NoAdsReference == 0)
         {
             Debug.Log("Calling ads down here");
 

@@ -5,12 +5,14 @@ using CloudOnce;
 
 public class CloudOnceServices : MonoBehaviour
 {
-    public static CloudOnceServices Instance { get; set; }
+    public static CloudOnceServices Instance {get; set;}
 
     public void Awake()
     {
         Instance = this;
-        TestingSingleton();
+        DontDestroyOnLoad(gameObject);
+
+        //TestingSingleton();
     }
 
     private void TestingSingleton()
