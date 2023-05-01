@@ -125,8 +125,6 @@ public class MainMenu : MonoBehaviour
         rewardsVideoButton.SetActive(true);
         tiktokButton.SetActive(true);
         storePanelGameObject.SetActive(false);
-
-
     }
 
 

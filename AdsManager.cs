@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
 
@@ -21,7 +20,8 @@ public class AdsManager : MonoBehaviour
     private string interestialAdsUnit = "ca-app-pub-3187572158588519/3114919207";
 
     //..Rewards VideoAdUnit
-    private string rewardVideoAds = "RewardsVideoca-app-pub-3187572158588519/6632579779";
+    private string rewardVideoAds = "ca-app-pub-3187572158588519/6632579779";
+    private string rewardsTestVideoAds = "ca-app-pub-3940256099942544/5354046379";
 
     //..Test AdsUnit
     private string testAds = "ca-app-pub-3940256099942544/2934735716";
@@ -47,23 +47,38 @@ public class AdsManager : MonoBehaviour
     {
         Instance = this;
 
+        /*
         //..When Loading another Scene, don't delete this gameObject
         //DontDestroyOnLoad(gameObject);
 
         #if UNITY_IOS
         //..Initialize app ID..
-        MobileAds.Initialize(init => { });
+        MobileAds.Initialize(initStatus => { });
+       
+
         #endif
 
         #if UNITY_ANDROID
         //..Initialize app ID for Android Devices..
-        MobileAds.Initialize(init => { });
+        MobileAds.Initialize(initStatus => { });
 
         #endif
+        */
     }
+
     // Start is called before the first frame update
     void Start()
     {
+        #if UNITY_IOS
+        //..Initialize app ID..
+        MobileAds.Initialize(initStatus => { });
+        #endif
+
+        #if UNITY_ANDROID
+        //..Initialize app ID for Android Devices..
+        MobileAds.Initialize(initStatus => { });
+        #endif
+
         int NoAdsReference = PlayerPrefs.GetInt("NoAds", 0);
 
         if(IAPurchase.Instance.removeAllAds_IAP == false || NoAdsReference == 0)
@@ -75,8 +90,6 @@ public class AdsManager : MonoBehaviour
             this.requestingVideoAds();
             this.requestRewardedVideoAds();
         }
-
-     
     }
 
     // Update is called once per frame
