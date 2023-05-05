@@ -21,7 +21,7 @@ public class FlashingButton : MonoBehaviour
     public int count = 0;
 
     //Check if the image if flashing on and off
-    private bool isFloating = false;
+    private bool isFlashing = false;
 
     public void Awake()
     {
@@ -46,6 +46,31 @@ public class FlashingButton : MonoBehaviour
     {
         //Start flashing on and off color on the image;
 
+    }
+
+    //Co-routine for the Flashing Functionality;
+    private IEnumerator FlashButton()
+    {
+        isFlashing = true;
+        //Light Red Color..
+        Color lightRedColor = new Color(1f, 0f, 0f, 0.5f);
+
+        while (isFlashing)
+        {
+
+            //Changing Colors;
+            buttonImage.color = lightRedColor;
+
+            //Wait for the following amount of seconds before changing: 0.05f;
+            yield return new WaitForSeconds(flashInterval);
+
+            //Changing Color back to Default color;
+            buttonImage.color = originalColor;
+
+            //Wait for the following amount of seconds before changing: 0.05f;
+            yield return new WaitForSeconds(flashInterval);
+
+        }
     }
 
     
