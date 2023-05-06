@@ -71,9 +71,20 @@ public class FlashingButton : MonoBehaviour
             yield return new WaitForSeconds(flashInterval);
 
         }
+
+
     }
 
-    
+    //..Method to Flashing;
+    private void StopFlashing() {
 
+        //..Changing Variable to False;
+        isFlashing = false;
+
+        //Resetting imaging color;
+        buttonImage.color = originalColor;
+        StopCoroutine(FlashButton());
+
+    }
 
 }
