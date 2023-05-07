@@ -16,6 +16,7 @@ public class GameM : MonoBehaviour
     public TextMeshProUGUI yellowGiftCount;
     public TextMeshProUGUI blueGiftCount;
 
+    //Animator Component of the Intrusction text; 
 
 
     //Score Count & Best Score Count..
@@ -37,8 +38,6 @@ public class GameM : MonoBehaviour
     public void Awake()
     {
         Instance = this;
-
-        
 
     }
 
