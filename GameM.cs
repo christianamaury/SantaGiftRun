@@ -16,7 +16,8 @@ public class GameM : MonoBehaviour
     public TextMeshProUGUI yellowGiftCount;
     public TextMeshProUGUI blueGiftCount;
 
-    //Animator Component of the Intrusction text; 
+    //Game Instructions TextMesh
+    public TextMeshProUGUI gameInstructions; 
 
 
     //Score Count & Best Score Count..
@@ -38,7 +39,7 @@ public class GameM : MonoBehaviour
     public void Awake()
     {
         Instance = this;
-
+ 
     }
 
     // Start is called before the first frame update
@@ -52,6 +53,9 @@ public class GameM : MonoBehaviour
         scoreCount.text = score.ToString();
         //bestScoreCount.text = PlayerPrefs.GetInt("BestScore", 0).ToString();
         bestScoreTransfer.text = PlayerPrefs.GetInt("BestScore", 0).ToString();
+
+        //Co-Routine to Disable Game Text Instructions.. in 4.5 seconds
+        StartCoroutine(DisableGameTextIntrusctions(4.5f));
 
         /*
          *OLD STUFF
@@ -67,6 +71,16 @@ public class GameM : MonoBehaviour
     void Update()
     {
 
+
+    }
+
+    //..Disabling Game Intructions Text Mesh in 4.5 seconds;
+    private IEnumerator DisableGameTextIntrusctions(float seconds)
+    {
+        //Waiting time..
+        yield return new WaitForSeconds(seconds);
+        //Disabling TextMesh...
+        gameInstructions.enabled = false;
     }
 
     public void redGiftCounts()
