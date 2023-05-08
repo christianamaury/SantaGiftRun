@@ -6,10 +6,11 @@ using TMPro;
 
 public class GameM : MonoBehaviour
 {
-    //In order to check score..., Compare which house the player has triggered with!
-    //Redhouse, YellowHouse, BlueHouse, GreenHouse
+    //..Reference of the GameM script; 
     public static GameM Instance { get; set; }
 
+    //In order to check on which house the player went in;
+    //Redhouse, YellowHouse, BlueHouse, GreenHouse for points purposes;
     //Reference of the Gifts Counts..
     public TextMeshProUGUI redGiftCount;
     public TextMeshProUGUI greenGiftCount;
@@ -19,22 +20,17 @@ public class GameM : MonoBehaviour
     //Game Instructions TextMesh
     public TextMeshProUGUI gameInstructions; 
 
-
     //Score Count & Best Score Count..
     public TextMeshProUGUI scoreCount;
 
-
-    //public TextMeshProUGUI bestScoreCount;
-    //public TextMeshProUGUI bestScoreText;
     public TextMeshProUGUI bestScoreTransfer;
 
-    //Count purposes..Antes tenian 1
+    //Variables for counting purposes;
     public int score = 0;
     public int blueGiftSCounts = 0;
     public int redGiftSCounts = 0;
     public int greenGiftSCounts = 0;
     public int yellowGiftSCounts = 0;
-
 
     public void Awake()
     {
@@ -57,21 +53,6 @@ public class GameM : MonoBehaviour
         //Co-Routine to Disable Game Text Instructions.. in 4.5 seconds
         StartCoroutine(DisableGameTextIntrusctions(4.5f));
 
-        /*
-         *OLD STUFF
-        //..Initialize Current Counts of the Gifts
-        redGiftCount.text = PlayerPrefs.GetInt("RedGiftCounts", 0).ToString();
-        greenGiftCount.text = PlayerPrefs.GetInt("GreenGiftCounts", 0).ToString();
-        yellowGiftCount.text = PlayerPrefs.GetInt("YellowGiftCounts", 0).ToString();
-        //blueGiftCount.text = PlayerPrefs.GetInt("BlueGiftCounts", 0).ToString();
-        */
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-
     }
 
     //..Disabling Game Intructions Text Mesh in 4.5 seconds;
@@ -88,18 +69,6 @@ public class GameM : MonoBehaviour
         redGiftSCounts = redGiftSCounts + 1;
         redGiftCount.text = redGiftSCounts.ToString();
 
-        /*
-        giftCounts = giftCounts + 1;
-        {
-            if(giftCounts > PlayerPrefs.GetInt("RedGiftCounts", 0))
-            {
-                //Saving the Count..
-                PlayerPrefs.SetInt("RedGiftCounts", giftCounts);
-                //..Updating the Text..
-                redGiftCount.text = giftCounts.ToString();
-            }
-        }
-        */
     }
 
     public void greenGiftCounts()
@@ -107,33 +76,12 @@ public class GameM : MonoBehaviour
         greenGiftSCounts = greenGiftSCounts + 1;
         greenGiftCount.text = greenGiftSCounts.ToString();
 
-        /*
-        giftCounts = giftCounts + 1;
-        if(giftCounts > PlayerPrefs.GetInt("GreenGiftCounts", 0))
-        {
-            //..Saving the Count
-            PlayerPrefs.SetInt("GreenGiftCounts", giftCounts);
-            //..Updating text
-            greenGiftCount.text = giftCounts.ToString();
-        }
-        */
     }
 
     public void blueGiftCounts()
     {
         blueGiftSCounts = blueGiftSCounts + 1;
         blueGiftCount.text = blueGiftSCounts.ToString();
-
-
-        /*
-        if(giftCounts > PlayerPrefs.GetInt("BlueGiftCounts", 0))
-        {
-            //..Saving the Count
-            PlayerPrefs.SetInt("BlueGiftCounts", giftCounts);
-            //..Updating text
-            blueGiftCount.text = giftCounts.ToString();
-        }
-        */
 
     }
 
@@ -142,17 +90,6 @@ public class GameM : MonoBehaviour
         yellowGiftSCounts = yellowGiftSCounts + 1;
         yellowGiftCount.text = yellowGiftSCounts.ToString();
 
-        /*
-        giftCounts = giftCounts + 1;
-        if(giftCounts > PlayerPrefs.GetInt("YellowGiftCounts", 0))
-        {
-            //..Saving the Count
-            PlayerPrefs.SetInt("YellowGiftCounts", giftCounts);
-            //..Updating text
-            yellowGiftCount.text = giftCounts.ToString();
-        }
-    }
-        */
     }
 
     public void savingActualScore()
@@ -180,11 +117,6 @@ public class GameM : MonoBehaviour
         MainMenu.Instance.socialMediaLink();
     }
 
-    public void displayInfoScreenPanel()
-    {
-        //MainMenu.Instance.displayInfoMenu();
-    }
-
     public void QuitGame()
     {
     
@@ -193,7 +125,7 @@ public class GameM : MonoBehaviour
 
     public void backToMainScreenMenu()
     {
-        //..Play UI Sound
+        //Play UI sound whenever a player click on the menu
         FindObjectOfType<AudioManager>().Play("Click");
 
         //..Loading Scene
@@ -203,7 +135,6 @@ public class GameM : MonoBehaviour
 
     public void seeOurGames()
     {
-      
         MainMenu.Instance.checkOurGames();
     }
 
