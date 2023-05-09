@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 //To access the Button Reference
-using UnityEngine.UI; 
-
+using UnityEngine.UI;
 
 public class FlashingButton : MonoBehaviour
 {
@@ -25,23 +23,25 @@ public class FlashingButton : MonoBehaviour
 
     //Check if the image if flashing on and off
     private bool isFlashing = false;
-
+    private bool isFlashingAmor = false; 
   
     // Start is called before the first frame update
     void Start()
     {
         //Safety Check to prevent the NullReferenceException from being thrown
-        //Potions Count variable from the Currency System;
+        //Health Potions Count variable from the Currency System;
         count = CurrencySystem.Instance.healthCount;
 
-        //Already saved potions
+        //Already Health Saved Points;
         savedCount = PlayerPrefs.GetInt("HealthPotions", 0);
 
         //Getting Button Image Component from the Button..
         buttonImage = uiButton.GetComponent<Image>();
-
+        //Getting Button Image Component from the Armor Button;
+   
         //Assigning default color reference from the Image;
         originalColor = buttonImage.color;
+      
     }
 
     // Update is called once per frame
@@ -50,10 +50,17 @@ public class FlashingButton : MonoBehaviour
         //Safety Check to prevent the NullReferenceException from being thrown
         //Potions Count variable from the Currency System;
         count = CurrencySystem.Instance.healthCount;
-
+      
         //Already saved potions
         savedCount = PlayerPrefs.GetInt("HealthPotions", 0);
 
+        //If Check Logic for the Flashing Effect
+        healthPotionsCheckEffect();
+
+    }
+
+    private void healthPotionsCheckEffect()
+    {
         //..Starting Flashing when count is greater than zero;
         //savedCount just to look for saved available potions for the player; 
         //!isFlashing is not false
@@ -75,7 +82,6 @@ public class FlashingButton : MonoBehaviour
             //Stopping Co-Routine;
             StopFlashing();
         }
-
     }
 
     //Co-routine for the Flashing Functionality;
@@ -90,24 +96,25 @@ public class FlashingButton : MonoBehaviour
 
             //Changing Colors;
             buttonImage.color = lightRedColor;
-            Debug.Log("Flashing Lights On and On"); 
+            Debug.Log("Flashing Lights On and On");
 
-            //Wait for the following amount of seconds before changing: 0.05f;
+            //Wait for the following amount of seconds before changing: 0.9f; 
             yield return new WaitForSeconds(flashInterval);
 
             //Changing Color back to Default color;
             buttonImage.color = originalColor;
 
-            //Wait for the following amount of seconds before changing: 0.05f;
+            //Wait for the following amount of seconds before changing: 0.9f; 
             yield return new WaitForSeconds(flashInterval);
 
         }
+
     }
 
     //..Method to Flashing;
     public void StopFlashing()
     {
-        //..Changing Variable to False;
+        //Changing Variable value;
         isFlashing = false;
 
         //Resetting imaging color;
@@ -115,4 +122,5 @@ public class FlashingButton : MonoBehaviour
         StopCoroutine(FlashButton());
 
     }
+
 }

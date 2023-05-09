@@ -63,6 +63,10 @@ public class RestartLevel : MonoBehaviour
 
         //Pausing game.. 
         Time.timeScale = 0;
+
+        //..Animating Game Over Text
+        GOTextAnimator.Instance.PlayTextAnimation();
+     
     }
 
     public void restartingActualLevel()
