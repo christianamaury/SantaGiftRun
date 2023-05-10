@@ -28,7 +28,6 @@ public class AdsManager : MonoBehaviour
 
     public int rewardedCoins = 0;
 
- 
     //AppID.., Android Device
     private string appAndroidID = "ca-app-pub-3187572158588519~9232770848";
     //Android Banner ID..

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 //To access the Button Reference
 using UnityEngine.UI;
 
@@ -47,9 +46,7 @@ public class armorFlashingButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Safety Check to prevent the NullReferenceException from being thrown
-        //Potions Count variable from the Currency System;
-   
+        //Safety Check to prevent the NullReferenceException from being thrown  
         //Armor Count;
         armorCount = CurrencySystem.Instance.armorCount;
 
@@ -63,7 +60,6 @@ public class armorFlashingButton : MonoBehaviour
 
     private void armorPotionsCheckEffect()
     {
-
         //..Starting Flashing when count is greater than zero;
         //savedCount just to look for saved available potions for the player; 
         //!isFlashing is not false

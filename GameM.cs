@@ -18,7 +18,8 @@ public class GameM : MonoBehaviour
     public TextMeshProUGUI blueGiftCount;
 
     //Game Instructions TextMesh
-    public TextMeshProUGUI gameInstructions; 
+    public TextMeshProUGUI gameInstructions;
+    public TextMeshProUGUI gamePresentsInstructions; 
 
     //Score Count & Best Score Count..
     public TextMeshProUGUI scoreCount;
@@ -32,10 +33,11 @@ public class GameM : MonoBehaviour
     public int greenGiftSCounts = 0;
     public int yellowGiftSCounts = 0;
 
+    private bool gameInstructionsBool = false;
+
     public void Awake()
     {
         Instance = this;
- 
     }
 
     // Start is called before the first frame update
@@ -53,6 +55,24 @@ public class GameM : MonoBehaviour
         //Co-Routine to Disable Game Text Instructions.. in 4.5 seconds
         StartCoroutine(DisableGameTextIntrusctions(4.5f));
 
+        //..Disabled by Default;
+        gamePresentsInstructions.enabled = false;
+
+    }
+
+    private void Update()
+    {
+        //Co-Routine to Disable Game Presents Instructions.. in 6.9 seconds
+        if (gameInstructionsBool)
+        {
+            StartCoroutine(DisableGamePresentsInstructions(9.4f));
+            gameInstructionsBool = false;
+        }
+        else
+        {
+            StopCoroutine(DisableGamePresentsInstructions(0));
+            GameInstruction.Instance.StopAnimatingText();
+        }
     }
 
     //..Disabling Game Intructions Text Mesh in 4.5 seconds;
@@ -62,6 +82,23 @@ public class GameM : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         //Disabling TextMesh...
         gameInstructions.enabled = false;
+        gameInstructionsBool = true;
+    }
+
+    private IEnumerator DisableGamePresentsInstructions(float seconds)
+    {
+        if (gameInstructionsBool)
+        {
+            yield return new WaitForSeconds(seconds);
+            //Enabling Text Animation;
+            gamePresentsInstructions.enabled = true;
+
+            yield return new WaitForSeconds(seconds);
+            gamePresentsInstructions.enabled = false;
+            gameInstructionsBool = false;
+            
+        }
+
     }
 
     public void redGiftCounts()
