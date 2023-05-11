@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance {get; set;}
 
-    //..An array of Sounds
+    //An array of Sounds
     public Sounds[] sounds;
 
     private void Awake()
@@ -17,13 +17,13 @@ public class AudioManager : MonoBehaviour
         {
             Instance = this;
         }
-        //..If not, we're already have one destroy it.. 
+        //If not, we're already have one destroy it..
         else
         {
             Destroy(gameObject); return;
         }
 
-        //..When Loading into a new Scene don't destroy this game object
+        //When Loading into a new Scene don't destroy this game object
         DontDestroyOnLoad(gameObject);
 
 
@@ -35,21 +35,14 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
-            
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        //..Play theme music.., Call method down here
+        //Play theme music.., Call method down here..
         Play("ThemeChristmas");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void Play (string name)
@@ -61,7 +54,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            //..Play the Song; 
+            //Play the Song..
             s.source.Play();
         }
 

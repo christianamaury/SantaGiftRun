@@ -45,27 +45,9 @@ public class AdsManager : MonoBehaviour
 
     {
         Instance = this;
-
-        /*
-        //..When Loading another Scene, don't delete this gameObject
-        //DontDestroyOnLoad(gameObject);
-
-        #if UNITY_IOS
-        //..Initialize app ID..
-        MobileAds.Initialize(initStatus => { });
-       
-
-        #endif
-
-        #if UNITY_ANDROID
-        //..Initialize app ID for Android Devices..
-        MobileAds.Initialize(initStatus => { });
-
-        #endif
-        */
     }
 
-    // Start is called before the first frame update
+    //Start is called before the first frame update
     void Start()
     {
         #if UNITY_IOS
@@ -73,28 +55,15 @@ public class AdsManager : MonoBehaviour
         MobileAds.Initialize(initStatus => { });
         #endif
 
-        #if UNITY_ANDROID
-        //..Initialize app ID for Android Devices..
-        MobileAds.Initialize(initStatus => { });
-        #endif
-
         int NoAdsReference = PlayerPrefs.GetInt("NoAds", 0);
 
         if(IAPurchase.Instance.removeAllAds_IAP == false || NoAdsReference == 0)
         {
-            Debug.Log("Calling ads down here");
-
-            //..Calling those Banners,Interestials and Rewarded Video Request
+            //Calling those Banners,Interestials and Rewarded Video Request..
             this.requestBanner();
             this.requestingVideoAds();
             this.requestRewardedVideoAds();
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void requestBanner()
@@ -107,29 +76,12 @@ public class AdsManager : MonoBehaviour
         //Loading Banner..with the request
         bannerView.LoadAd(request);
         #endif
-
-        #if UNITY_ANDROID
-        bannerView = new BannerView(androidBannerID, AdSize.Banner, AdPosition.Top);
-        //Creating ampty Ad Request..
-        AdRequest request = new AdRequest.Builder().Build();
-
-        //Loading Banner with the request..
-        bannerView.LoadAd(request);
-        #endif
     }
 
     public void requestRewardedVideoAds()
     {
         #if UNITY_IOS
         this.rewardedAd = new RewardedAd(rewardVideoAds);
-        //..Creating an empty AdRequest
-        AdRequest request = new AdRequest.Builder().Build();
-        //..Loading the Rewarded ad with the request;
-        this.rewardedAd.LoadAd(request);
-        #endif
-
-        #if UNITY_ANDROID
-        this.rewardedAd = new RewardedAd(androidRewardVideoAds);
         //..Creating an empty AdRequest
         AdRequest request = new AdRequest.Builder().Build();
         //..Loading the Rewarded ad with the request;
@@ -147,16 +99,6 @@ public class AdsManager : MonoBehaviour
         //Loading the Interestial Ads..
         this.interestialAds.LoadAd(request);
         #endif
-
-        #if UNITY_ANDROID
-        this.interestialAds = new InterstitialAd(androidInterestialAds);
-
-        //..Creating an empty AdRequest...
-        AdRequest request = new AdRequest.Builder().Build();
-
-        //Load the interestial with the request..
-        this.interestialAds.LoadAd(request);
-        #endif
     }
 
     public void showingRewardedVideoAds()
@@ -168,7 +110,7 @@ public class AdsManager : MonoBehaviour
 
         else {Debug.Log("Rewarded Video aren't ready to load up yet");}
 
-        //..Rewarded Video Ads Behaviour
+        //Rewarded Video Ads Behaviour..
         this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
     }
 
@@ -176,11 +118,11 @@ public class AdsManager : MonoBehaviour
     {
         if (this.interestialAds.IsLoaded())
         {
-            //..Display Ads..
+            //Display Ads..
             this.interestialAds.Show();
         }
 
-        //..If isn't ready yet
+        //If isn't ready yet..
         else {Debug.Log("Ads are not ready to load up yet");}
 
         //Interestials Ads Behaviour.. 
@@ -208,28 +150,21 @@ public class AdsManager : MonoBehaviour
 
     }
 
-    //..Called when the user should be rewarded for interacting with the ad.. 
+    //Called when the user should be rewarded for interacting with the ad.. 
     public void HandleUserEarnedReward(object sender, Reward args)
     {
-        //string type = args.Type;
-
+     
         double amount = args.Amount;
 
         int coinsAvailable = PlayerPrefs.GetInt("Currency", 0);
         rewardedCoins = (int)amount;
         coinsAvailable = coinsAvailable + rewardedCoins;
 
-        //..Availble coins now
+        //Availble coins now;
         PlayerPrefs.SetInt("Currency", coinsAvailable);
 
-        //..Updating Coins Text;
+        //Updating Coins Text;
         Shop.Instance.coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
 
-
-        /*
-        MonoBehaviour.print(
-            "HandleRewardedAdRewarded event received for "
-                        + amount.ToString() + " " + type);
-        */
     }
 }

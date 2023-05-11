@@ -60,7 +60,7 @@ public class armorFlashingButton : MonoBehaviour
 
     private void armorPotionsCheckEffect()
     {
-        //..Starting Flashing when count is greater than zero;
+        //Starting Flashing when count is greater than zero..
         //savedCount just to look for saved available potions for the player; 
         //!isFlashing is not false
 
