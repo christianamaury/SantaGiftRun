@@ -11,28 +11,16 @@ public class BlueHScore : MonoBehaviour
         Instance = this;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerStay(Collider col)
     {
         if(col.gameObject.tag == "Player")
         {
             if(GameM.Instance.blueGiftSCounts > 0)
             {
-                //..Honoring life on the player
+                //Honoring life on the player..
                 StaminaBar.Instance.GrantHealth();
 
-                //..Playing santa special sound
+                //Playing santa special sound..
                 AudioManager.Instance.Play("MerryChristmas");
 
                 GameM.Instance.savingActualScore();
