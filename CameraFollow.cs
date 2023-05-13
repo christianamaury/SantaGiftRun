@@ -23,12 +23,6 @@ public class CameraFollow : MonoBehaviour
         cameraMovement();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void cameraMovement()
     {
         //Where we would like the camera to be placed..
