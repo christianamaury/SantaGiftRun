@@ -12,19 +12,6 @@ public class CloudOnceServices : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        //TestingSingleton();
-    }
-
-    private void TestingSingleton()
-    {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     public void SubmitScoreToLeaderboard(int score)
