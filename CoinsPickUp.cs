@@ -11,18 +11,6 @@ public class CoinsPickUp : MonoBehaviour
         Instance = this; 
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
@@ -30,8 +18,7 @@ public class CoinsPickUp : MonoBehaviour
             //..Add Coins into the system..
             CurrencySystem.Instance.PickUpCoins();
 
-
-            //..Special sound effect for the pick up..
+            //Special sound effect for the pick up..
 
             //..Destroy this GameObject afterpickUp
             Destroy(gameObject);

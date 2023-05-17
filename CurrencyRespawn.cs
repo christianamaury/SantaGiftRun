@@ -9,7 +9,7 @@ public class CurrencyRespawn : MonoBehaviour
     public int currencyCount;
     public GameObject Currency;
 
-    //..Vectors
+    //Vectors Points..
     public int xCurrencyPosition;
     public int zCurrencyPosition;
     public float yCurrencyPosition = 0.12f;
@@ -23,12 +23,6 @@ public class CurrencyRespawn : MonoBehaviour
     void Start()
     {
         StartCoroutine(CurrencyRespawner());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     IEnumerator CurrencyRespawner()
