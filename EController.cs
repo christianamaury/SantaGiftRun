@@ -36,22 +36,20 @@ public class EController : MonoBehaviour
     {
         //Play animation..
         anim.SetBool("isWalking", true);
-        //..Enemy Following Player
+        //Enemy Following Player..
         enemy.SetDestination(playerTransform.position);
         
     }
     public void attackingAnimation()
     {
-        //anim.SetBool("isWalking", false);
-        //anim.SetTrigger("Attacking");
+        //Enemy Attack Animation;
         anim.SetBool("isAttacking", true);
     }
 
     public void stoppingAttackAnimation()
     {
+        //Stop playing attack animation; 
         anim.SetBool("isAttacking", false);
-        //anim.SetBool("isWalking", true);
-        
     }
 
     public void OnTriggerEnter(Collider col)
