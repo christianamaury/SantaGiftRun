@@ -7,25 +7,22 @@ public class CurrencySystem : MonoBehaviour
 {
     public static CurrencySystem Instance {get; set;}
 
-
     //..Coins TextMesh Pro Object
     public TextMeshProUGUI coinsText;
-    //public TextMeshProUGUI potionsTextCount;
-    //public TextMeshProUGUI armorPotionsTextCount;
     public TextMeshProUGUI coinsTextTransfer;
     public TextMeshProUGUI healthPotionsCount;
     public TextMeshProUGUI armorPotionsTextCount;
     public GameObject coinsImageGameObject;
 
-    //..Once the coin has been picked up
+    //Once the coin has been picked up
     public int coinsPickUp = 0;
     public int armorCount = 0;
     public int currentCoinsAvailable;
 
-    //..Armor and Health Points Count..
+    //Armor and Health Points Count..
     public int healthCount = 0;
 
-    //..Referenece of the amount of coins you can buy
+    //Referenece of the amount of coins you can buy..
     public const int MINIMUM_COINS = 300;
     public const int MEDIUM_COINS = 640;
     public const int LARGE_COINS = 1150;
@@ -38,13 +35,13 @@ public class CurrencySystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //..Getting your coins Reference..
+        //Getting your coins Reference..
         coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
 
-        //..Health Potions Available
+        //Health Potions Available
         healthPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
 
-        //..Armor Potions Available
+        //Armor Potions Available
         armorPotionsTextCount.text = PlayerPrefs.GetInt("ArmorPotions", 0).ToString();
 
 
@@ -53,7 +50,7 @@ public class CurrencySystem : MonoBehaviour
     public void PickUpCoins()
 
     {
-        //..Esto lo cambie de order
+        //Adding Saved Coins;
         coinsPickUp = PlayerPrefs.GetInt("Currency", 0);
 
         coinsPickUp = coinsPickUp + 1;
@@ -61,10 +58,10 @@ public class CurrencySystem : MonoBehaviour
         
         if (coinsPickUp > PlayerPrefs.GetInt("Currency", 0))
         {
-            //..Setting currency for the player
+            //Setting currency for the player..
             PlayerPrefs.SetInt("Currency", coinsPickUp);
 
-            //..Updating Currency text for the player
+            //Updating Currency text for the player;
             coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
 
             coinsTextTransfer.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
@@ -93,21 +90,16 @@ public class CurrencySystem : MonoBehaviour
             //..Saving these Health Potions in the System
             PlayerPrefs.SetInt("HealthPotions", healthCount);
 
-            //..Updating our Text Count Layer.. 
+            //Updating our Text Count Layer.. 
             healthPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
 
-            //..Updating TextMesh Object
+            //Updating TextMesh Object
             coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
 
-            //..Transfering Coins
+            //Transfering Coins
             coinsTextTransfer.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
 
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
