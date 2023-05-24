@@ -28,7 +28,7 @@ public class EController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //..Enemy movement function
+        //..Enemy movement function;
         enemyMovement();
     }
 

@@ -15,12 +15,13 @@ public class CoinsPickUp : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            //..Add Coins into the system..
+            //Add Coins into the system..
             CurrencySystem.Instance.PickUpCoins();
 
             //Special sound effect for the pick up..
+            AudioManager.Instance.Play("CoinsAudio");
 
-            //..Destroy this GameObject afterpickUp
+            //Destroy this GameObject right after;
             Destroy(gameObject);
         }
     }
