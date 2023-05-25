@@ -5,6 +5,7 @@ using UnityEngine;
 //Script to Animate the Game Instructions Text;
 public class GameInstruction : MonoBehaviour
 {
+    //Static Reference Variable for OOP;
     public static GameInstruction Instance {get; set;}
     private Animator anim;
 
@@ -17,12 +18,6 @@ public class GameInstruction : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void StopAnimatingText()

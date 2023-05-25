@@ -18,14 +18,14 @@ public class EController : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    // Start is called before the first frame update
+    //Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         enemy = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame
+    //Update is called once per frame
     void Update()
     {
         //..Enemy movement function;
