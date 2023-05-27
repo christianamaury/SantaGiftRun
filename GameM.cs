@@ -49,13 +49,12 @@ public class GameM : MonoBehaviour
         yellowGiftCount.text = yellowGiftSCounts.ToString();
 
         scoreCount.text = score.ToString();
-        //bestScoreCount.text = PlayerPrefs.GetInt("BestScore", 0).ToString();
         bestScoreTransfer.text = PlayerPrefs.GetInt("BestScore", 0).ToString();
 
-        //Co-Routine to Disable Game Text Instructions.. in 4.5 seconds
+        //Co-Routine to Disable Game Text Instructions.. in 4.5 seconds;
         StartCoroutine(DisableGameTextIntrusctions(4.5f));
 
-        //..Disabled by Default;
+        //Disabled by Default..
         gamePresentsInstructions.enabled = false;
 
     }
@@ -96,7 +95,6 @@ public class GameM : MonoBehaviour
             yield return new WaitForSeconds(seconds);
             gamePresentsInstructions.enabled = false;
             gameInstructionsBool = false;
-            
         }
 
     }
@@ -105,28 +103,24 @@ public class GameM : MonoBehaviour
     {
         redGiftSCounts = redGiftSCounts + 1;
         redGiftCount.text = redGiftSCounts.ToString();
-
     }
 
     public void greenGiftCounts()
     {
         greenGiftSCounts = greenGiftSCounts + 1;
         greenGiftCount.text = greenGiftSCounts.ToString();
-
     }
 
     public void blueGiftCounts()
     {
         blueGiftSCounts = blueGiftSCounts + 1;
         blueGiftCount.text = blueGiftSCounts.ToString();
-
     }
 
     public void yellowGiftCounts()
     {
         yellowGiftSCounts = yellowGiftSCounts + 1;
         yellowGiftCount.text = yellowGiftSCounts.ToString();
-
     }
 
     public void savingActualScore()
@@ -135,28 +129,25 @@ public class GameM : MonoBehaviour
         score = score + 1;
         if(score > PlayerPrefs.GetInt("BestScore", 0))
         {
-            //..Saving the count
+            //Saving the Best Count Data;
             PlayerPrefs.SetInt("BestScore", score);
 
-            //..Saving Bestscore into the Leaderboard;
+            //Saving Bestscore into the Leaderboard..
             CloudOnceServices.Instance.SubmitScoreToLeaderboard(score);
 
-            //..Transferring BestScore, Updating it;
+            //Transferring BestScore, Updating it;
             bestScoreTransfer.text = PlayerPrefs.GetInt("BestScore", 0).ToString();
-
         }
         
     }
 
     public void tikTokProfile()
     {
-       
         MainMenu.Instance.socialMediaLink();
     }
 
     public void QuitGame()
     {
-    
         MainMenu.Instance.quitGame();
     }
 
@@ -165,7 +156,7 @@ public class GameM : MonoBehaviour
         //Play UI sound whenever a player click on the menu
         FindObjectOfType<AudioManager>().Play("Click");
 
-        //..Loading Scene
+        //Loading Scene..
         SceneManager.LoadScene(1);
         Time.timeScale = 1;
     }
