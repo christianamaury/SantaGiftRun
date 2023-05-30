@@ -7,14 +7,12 @@ public class GiftRespawn : MonoBehaviour
     public static GiftRespawn Instance {get; set;}
 
     public GameObject[] Gifts;
-
     private int countGifts;
 
-    //..0.352f / 0.5
+    //Respawn Vector Positions where the gift should be respawning;
     private int xGiftPosition;
     private int zGiftPosition;
     private float yGiftPosition = 0.352f;
-
 
     // Start is called before the first frame update
     void Start()
@@ -22,16 +20,9 @@ public class GiftRespawn : MonoBehaviour
         StartCoroutine(RespawnGifts());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     IEnumerator RespawnGifts()
     {
-
-        //Previous.. 14, remember, Previuos 27
+       //Check for the countGifts amount, if less Than 10 Game Objects in the Scene.,.
        while(countGifts < 10)
         {
             xGiftPosition = Random.Range(-14, 14);
@@ -40,7 +31,7 @@ public class GiftRespawn : MonoBehaviour
             int randomGift = Random.Range(0, Gifts.Length);
             GameObject randomGiftObject = Gifts[randomGift];
 
-            //Instance (randomGiftObject, new Vector3(xGiftPosition, yGiftPosition, zGiftPosition), Quaternion.identity);
+            //Instantiate game Object on the following Vectors;
             Instantiate(randomGiftObject, new Vector3(xGiftPosition, yGiftPosition, zGiftPosition), Quaternion.identity);
             yield return new WaitForSeconds(0.80f);
             countGifts = countGifts + 1;
