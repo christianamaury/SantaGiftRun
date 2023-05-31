@@ -21,15 +21,8 @@ public class GOTextAnimator : MonoBehaviour
         anim.updateMode = AnimatorUpdateMode.UnscaledTime;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void PlayTextAnimation()
     {
-
         //Activating the Animator on the Game Over Menu; 
         anim.SetTrigger("GameOver");
     }
