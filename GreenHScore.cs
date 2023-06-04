@@ -11,44 +11,33 @@ public class GreenHScore : MonoBehaviour
         Instance = this;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerStay(Collider col)
     {
         if(col.gameObject.tag == "Player")
         {
                 if (GameM.Instance.greenGiftSCounts > 0)
             {
-                //..Honoring life on the player
+                //Adding life to the player;
                 StaminaBar.Instance.GrantHealth();
 
-                //..Playing santa special sound
+                //Playing Santa Claus Voice Sound..
                 AudioManager.Instance.Play("MerryChristmas");
 
-                //..Saving the actual Score
+                //Saving the actual Score..
                 GameM.Instance.savingActualScore();
 
-                //..Updating score
+                //Updating scoreCount variable..
                 GameM.Instance.scoreCount.text = GameM.Instance.score.ToString();
-
+                //Removing Score from the Variable since it has been used;
                 GameM.Instance.greenGiftSCounts = GameM.Instance.greenGiftSCounts - 1;
 
-                //..This will fix UI Text Count Bug;
+                //This will fix UI Text Count Bug..
                 CurrencySystem.Instance.healthCount = PlayerPrefs.GetInt("HealthPotions", 0);
                 CurrencySystem.Instance.healthCount += 1;
                 PlayerPrefs.SetInt("HealthPotions", CurrencySystem.Instance.healthCount);
                 CurrencySystem.Instance.healthPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
 
+                //Adding textVaue to the TextMeshPro Text;
                 GameM.Instance.greenGiftCount.text = GameM.Instance.greenGiftSCounts.ToString();
                
             }
