@@ -11,18 +11,6 @@ public class HealthPotion : MonoBehaviour
         Instance = this;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider col)
     {
         if(col.gameObject.tag == "Player")
@@ -36,10 +24,10 @@ public class HealthPotion : MonoBehaviour
 
             if(CurrencySystem.Instance.healthCount > PlayerPrefs.GetInt("HealthPotions", 0))
             {
-                //..Setting up Potions Available
+                //Setting up Potions Available;
                 PlayerPrefs.SetInt("HealthPotions", CurrencySystem.Instance.healthCount);
 
-                //..Updating Text Count
+                //Updating Text Count..
                 CurrencySystem.Instance.healthPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
 
             }
