@@ -9,8 +9,7 @@ public class MainMenu : MonoBehaviour
 {
     public static MainMenu Instance {get; set;}
 
-
-    //..Buttons & UI Panels Game Object
+    //..Buttons & UI Panels Game Object;
     public GameObject infoPanelGameObject;
     public GameObject storePanelGameObject;
     public GameObject playGameButton;
@@ -22,15 +21,9 @@ public class MainMenu : MonoBehaviour
     public GameObject infoButton;
     public GameObject storeGameButtton;
 
-    //..Coins Reference
-    //public TextMeshProUGUI availableCurrency; 
-
-
-
     private void Awake()
     {
         Instance = this;
-
     }
 
     // Start is called before the first frame update
@@ -38,36 +31,27 @@ public class MainMenu : MonoBehaviour
     {
         infoPanelGameObject.SetActive(false);
         storePanelGameObject.SetActive(false);
-
-        //availableCurrency.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
     }
 
     public void startGame()
     {
-        //..Putting Sounds here
+        //Putting Sounds here
         FindObjectOfType<AudioManager>().Play("Click");
 
-        //..Loading Scene
+        //Loading Scene..
         SceneManager.LoadScene(2);
         Time.timeScale = 1;
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void ShopMenu()
     {
-        //..Putting Sounds here
+        //Putting UI Sound here..
         FindObjectOfType<AudioManager>().Play("Click");
 
         storePanelGameObject.SetActive(true);
 
-        //.Turning off the info panel
-        
+        //Turning off the info panel..
         infoButton.SetActive(false);
         playGameButton.SetActive(false);
         quitGameButton.SetActive(false);
@@ -77,26 +61,25 @@ public class MainMenu : MonoBehaviour
         leaderboardButton.SetActive(false);
         rewardsVideoButton.SetActive(false);
         tiktokButton.SetActive(false);
-
     }
 
     public void socialMediaLink()
     {
-        //..Putting Sounds here
+        //..Putting UI Sound here
         FindObjectOfType<AudioManager>().Play("Click");
 
         //Opening Tik Tok Account profile..
-        Application.OpenURL("https://vm.tiktok.com/ZMeNXyTSv/");
+        Application.OpenURL("https://www.tiktok.com/@sweetestent");
     }
 
     public void displayInfoMenu()
     {
-        //..Button Sounds
+        //Button Sounds.,.
         FindObjectOfType<AudioManager>().Play("Click");
 
         infoPanelGameObject.SetActive(true);
 
-        //..Turning off these buttons
+        //Turning off these buttons..
         playGameButton.SetActive(false);
         quitGameButton.SetActive(false);
         tiktokButton.SetActive(false);
@@ -127,19 +110,18 @@ public class MainMenu : MonoBehaviour
         storePanelGameObject.SetActive(false);
     }
 
-
     public void quitGame()
     {
-        //..Putting Sounds here
+        //Putting Sounds here..
         FindObjectOfType<AudioManager>().Play("Click");
 
-        //..Quitting Application
+        //Quitting Application.,.
         Application.Quit();
     }
 
     public void checkOurGames()
     {
-        //..Play UI Sound
+        //Play UI Sound;
         FindObjectOfType<AudioManager>().Play("Click");
 
         if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.OSXPlayer)
@@ -147,9 +129,5 @@ public class MainMenu : MonoBehaviour
             Application.OpenURL("https://apps.apple.com/us/developer/christian-a-castro/id1427156495");
         }
 
-        if (Application.platform != RuntimePlatform.IPhonePlayer || Application.platform != RuntimePlatform.OSXPlayer)
-        {
-            Application.OpenURL("https://play.google.com/store/apps/developer?id=Sweetest+Productions+LLC");
-        }
     }
 }

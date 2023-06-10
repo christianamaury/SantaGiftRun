@@ -12,13 +12,13 @@ public class IAPurchase : MonoBehaviour, IStoreListener
     private static IStoreController m_StoreController;
     private static IExtensionProvider m_StoreExtensionProvider;
 
-    //..Products, so far only remove Ads
+    //Products, so far only remove Ads..
     private string removeAllAds = "Remove_Ads_SantaGiftRun";
     private string minimumCoins = "300_Coins";
     private string mediumCoins = "640_Coins";
     private string largeCoins = "1150_Coins";
 
-    //..Using this variable to check if the customer paid to remove all Ads.
+    //Using this variable to check if the customer paid to remove all Ads;
     private int NoAds = 0;
 
     public bool removeAllAds_IAP = false;
@@ -49,7 +49,7 @@ public class IAPurchase : MonoBehaviour, IStoreListener
 
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
-        //..Adding Products
+        //Adding Products..
         builder.AddProduct(removeAllAds, ProductType.NonConsumable);
         builder.AddProduct(minimumCoins, ProductType.Consumable);
         builder.AddProduct(mediumCoins, ProductType.Consumable);
@@ -263,7 +263,7 @@ public class IAPurchase : MonoBehaviour, IStoreListener
                 removeAllAds_IAP = true;
                 if(removeAllAds_IAP == true)
                 {
-                    //..Already bought it, remove all Ads;
+                    //Already bought it, remove all Ads;
                     PlayerPrefs.SetInt("NoAds", 1);
                 }
             }
