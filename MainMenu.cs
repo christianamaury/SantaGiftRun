@@ -65,7 +65,7 @@ public class MainMenu : MonoBehaviour
 
     public void socialMediaLink()
     {
-        //..Putting UI Sound here
+        //..Putting UI Soundhere
         FindObjectOfType<AudioManager>().Play("Click");
 
         //Opening Tik Tok Account profile..

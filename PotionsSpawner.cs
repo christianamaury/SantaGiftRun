@@ -10,7 +10,7 @@ public class PotionsSpawner : MonoBehaviour
     public int potionsCount;
     public GameObject [] Potions;
 
-    //..Vectors
+    //Vectors Points;
     public int xPotionsPosition;
     public int zPotionsPosition;
     public float yPotionsPotion = 0.352f;
@@ -20,17 +20,10 @@ public class PotionsSpawner : MonoBehaviour
         Instance = this;
     }
 
-
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(RespawnPotions());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     IEnumerator RespawnPotions()
@@ -44,7 +37,7 @@ public class PotionsSpawner : MonoBehaviour
             randomPotion = Random.Range(0, Potions.Length);
             GameObject randomObject = Potions[randomPotion];
 
-            //..Instantiate the GameObject..
+            //Instantiate the GameObject..
             Instantiate(randomObject, new Vector3(xPotionsPosition, yPotionsPotion, zPotionsPosition), Quaternion.identity);
             yield return new WaitForSeconds(14.86f);
 
