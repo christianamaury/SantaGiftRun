@@ -11,26 +11,14 @@ public class RedGPickUp : MonoBehaviour
         Instance = this;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
-            //..Saving RedPresent Pickups
+            //Saving RedPresent Pickups..
             GameM.Instance.redGiftCounts();
 
-            //..Special Sound, Pickup
+            //Special PickUp Sounds;
             AudioManager.Instance.Play("PickUpPresents");
 
             Destroy(gameObject);
