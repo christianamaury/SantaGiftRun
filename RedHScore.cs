@@ -11,43 +11,30 @@ public class RedHScore : MonoBehaviour
         Instance = this;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerStay(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
             if(GameM.Instance.redGiftSCounts > 0)
             {
-                //..Honoring life on the player
+                //Granting Player Health;
                 StaminaBar.Instance.GrantHealth();
 
-                //..Playing santa special sound
+                //Playing Santan Claus Special Sound..
                 AudioManager.Instance.Play("MerryChristmas");
 
-                //..Saving Actual Score
+                //Saving the score;
                 GameM.Instance.savingActualScore();
 
                 GameM.Instance.scoreCount.text = GameM.Instance.score.ToString();
 
                 GameM.Instance.redGiftSCounts = GameM.Instance.redGiftSCounts - 1;
 
-                //..This will fix UI Text Count Bug;
+                //Updating text count;
                 CurrencySystem.Instance.healthCount = PlayerPrefs.GetInt("HealthPotions", 0);
                 CurrencySystem.Instance.healthCount += 1;
                 PlayerPrefs.SetInt("HealthPotions", CurrencySystem.Instance.healthCount);
                 CurrencySystem.Instance.healthPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
-
                 GameM.Instance.redGiftCount.text = GameM.Instance.redGiftSCounts.ToString();
                 
             }   
