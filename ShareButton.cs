@@ -10,10 +10,8 @@ public class ShareButton : MonoBehaviour
     public void ClickShareButton()
     {
         sharedMessage = "WoW!! Did I just scored" + PlayerPrefs.GetInt("BestScore", 0).ToString() + "points in Santa Gift Run";
-
         StartCoroutine(TakeSSAndShare());
     }
-
 
     private IEnumerator TakeSSAndShare()
     {
@@ -27,7 +25,7 @@ public class ShareButton : MonoBehaviour
         string filePath = Path.Combine(Application.temporaryCachePath, "shared img.png");
         File.WriteAllBytes(filePath, ss.EncodeToPNG());
 
-        //..In order to avoid memory leaks
+        //In order to avoid memory leaks
         Destroy(ss);
 
         new NativeShare().AddFile(filePath).SetSubject("Santa Gift Run!").SetText(sharedMessage).Share();
