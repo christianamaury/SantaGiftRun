@@ -5,7 +5,6 @@ using UnityEngine;
 public class RestorePurchases : MonoBehaviour
 {
     public static RestorePurchases Instance { get; set; }
-
     public void Awake()
     {
         Instance = this;
@@ -16,10 +15,6 @@ public class RestorePurchases : MonoBehaviour
     {
         #if UNITY_IOS
         gameObject.SetActive(true);
-        #endif
-
-        #if UNITY_ANDROID
-        gameObject.SetActive(false);
         #endif
     }
 
