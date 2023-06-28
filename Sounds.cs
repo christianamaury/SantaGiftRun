@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-//..In order to show in the inspector
+//In order to show in the inspector
 [System.Serializable]
 public class Sounds
 {
     public AudioClip clip;
-    //..Creating a slider..
+    //Creating a slider..
     [Range(0f, 0.1f)]
 
-    //..Volume, esto puedo cambiarlo aquí para que se escuche mas duro.. 
+    //Volume Component Reference to do changes in the Unity Editor;
     public float volume;
     [Range(.1f, 3.0f)]
 
@@ -21,7 +21,7 @@ public class Sounds
     
     public bool loop;
 
-    //..Hiding in Inspector
+    //Hiding in Inspector;
     [HideInInspector]
     public AudioSource source;
 
