@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class StaminaBar : MonoBehaviour
 {
-
     public static StaminaBar Instance {get; set;}
 
     public Slider healthBar;
@@ -13,19 +12,16 @@ public class StaminaBar : MonoBehaviour
 
     public float maxArmorHealth = 50f;
 
-    //..Reference of the Armor Health Points,
+    //Reference of the Armor Health Points,..
     public float armorHealthPoints = 15.5f;
 
+    //Health variables;
     public float maxHealth = 100f;
-    //..12.5f, 15.5
     public float healthPoints = 15.5f;
 
-    //Previosly., 5 - 2.2, 1.7f, 0.9f, 0.4, 0.01
+    //Damage Variables;
     public float damagePerWalk = 0.1f;
     public float testingDamage = 0.02f;
-
-    //..2.3f 2.1, 1.3f (pero lo cambio porque use OnTriggerEnter)
-    //..Ahora como arregle bug y puse OnTrigger enter en el enemy class, baja el damage
     public float enemyDamage = 0.01f;
 
     private void Awake()
@@ -36,20 +32,14 @@ public class StaminaBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //..Health Bar
+        //Health Bar;
         healthBar.maxValue = maxHealth;
 
-        //..Armor Bar..
+        //Armor Bar..
         armorBar.maxValue = maxArmorHealth;
 
         CurrencySystem.Instance.armorCount = PlayerPrefs.GetInt("ArmorPotions");
         CurrencySystem.Instance.healthCount = PlayerPrefs.GetInt("HealthPotions");
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         
     }
 
@@ -61,22 +51,19 @@ public class StaminaBar : MonoBehaviour
         {
             maxArmorHealth = maxArmorHealth + armorHealthPoints;
 
-            //..Updating Armor Bar Health Slide Bar
+            //Updating Armor Bar Health Slide Bar;
             armorBar.value = maxArmorHealth;
-
 
             CurrencySystem.Instance.armorCount = PlayerPrefs.GetInt("ArmorPotions", 0);
             CurrencySystem.Instance.armorCount = CurrencySystem.Instance.armorCount - 1;
             CurrencySystem.Instance.armorPotionsTextCount.text = CurrencySystem.Instance.armorCount.ToString();
 
-            //CurrencySystem.Instance.armor.text = CurrencySystem.Instance.healthCount.ToString();
-
             if (CurrencySystem.Instance.armorCount < PlayerPrefs.GetInt("ArmorPotions", 0))
             {
-                //..Setting up Potions Available
+                //Setting up Potions Available..
                 PlayerPrefs.SetInt("ArmorPotions", CurrencySystem.Instance.armorCount);
 
-                //..Updating Text Count
+                //Updating Text Count;
                 CurrencySystem.Instance.armorPotionsTextCount.text = PlayerPrefs.GetInt("ArmorPotions", 0).ToString();
 
             }
@@ -97,8 +84,7 @@ public class StaminaBar : MonoBehaviour
         {
             maxHealth = maxHealth + healthPoints;
 
-
-            //..Updating Health Bar Slider Bar..
+            //Updating Health Bar Slider Bar..
             healthBar.value = maxHealth;
 
             CurrencySystem.Instance.healthCount = PlayerPrefs.GetInt("HealthPotions", 0);
@@ -107,14 +93,12 @@ public class StaminaBar : MonoBehaviour
 
             if (CurrencySystem.Instance.healthCount < PlayerPrefs.GetInt("HealthPotions", 0))
             {
-                //..Setting up Potions Available
+                //Setting up available Potions;
                 PlayerPrefs.SetInt("HealthPotions", CurrencySystem.Instance.healthCount);
 
-                //..Updating Text Count
+                //Updating Text Count;
                 CurrencySystem.Instance.healthPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
-
             }
-
 
             if (maxHealth >= 50f)
             {
@@ -122,7 +106,6 @@ public class StaminaBar : MonoBehaviour
             }
         }
 
-        
     }
 
     public void damagePerWalking()
@@ -132,47 +115,30 @@ public class StaminaBar : MonoBehaviour
         //Updating Health slider..
         healthBar.value = maxHealth;
 
+        //I can stop playing the game background music in the if statement, eventually..
         if(maxHealth <= 0)
         {
-            //..Stop playing background music, maybe
-
-            //..Game Over, Load Game Menu..
+            //Game Over, Load Game Menu..
             RestartLevel.Instance.showingRestartMenu();
         }
     }
 
     public void attackingPlayer()
     {
-        /*
-        maxHealth = maxHealth - enemyDamage;
-
-        //Updating Health Slider..
-        healthBar.value = maxHealth;
-        if(maxHealth <= 0)
-        {
-            //..Stop playing the music in the background
-
-            //..Load Game Menu
-            RestartLevel.Instance.showingRestartMenu();
-        }
-        */
-
-
-        //..First check on Armor Bar
+        //Check 1st on the Armor Bar;
         if(maxArmorHealth > 0)
         {
             maxArmorHealth = maxArmorHealth - enemyDamage;
 
-            //..Update the Armor Bar
+            //Update the Armor Bar;
             armorBar.value = maxArmorHealth;
-           
         }
 
         if (maxArmorHealth <= 0)
         {
             maxHealth = maxHealth - enemyDamage;
 
-            //..Updating Health Bar..
+            //Updating Health Bar..
             healthBar.value = maxHealth;
 
             if(maxHealth <=0)
@@ -188,21 +154,9 @@ public class StaminaBar : MonoBehaviour
         healthBar.value = maxHealth;
         if(maxHealth <= 0)
         {
-            //..Load Game Menu
+            //Load Game Menu..,
             RestartLevel.Instance.showingRestartMenu();
         }
     }
 
-    /*
-    public void setHealth(int health)
-    {
-        slider.value = health;
-    }
-
-    public void setMaxHealth(int health)
-    {
-        slider.maxValue = health;
-        slider.value = health; 
-    }
-    */
 }
