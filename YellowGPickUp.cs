@@ -11,23 +11,11 @@ public class YellowGPickUp : MonoBehaviour
         Instance = this;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider col)
     {
         if(col.gameObject.tag == "Player")
         {
-            //..Saving Gift Counts for the Yellow present
+            //Saving Gift Counts for the Yellow present;
             GameM.Instance.yellowGiftCounts();
 
             //Pick Gift Sound..
