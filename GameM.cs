@@ -54,7 +54,8 @@ public class GameM : MonoBehaviour
         //Co-Routine to Disable Game Text Instructions.. in 4.5 seconds;
         StartCoroutine(DisableGameTextIntrusctions(4.5f));
 
-        //Disabled by Default..
+        //Game Presents Text TextMeshPro Object is Disabled by Default..
+        //gameInstructions.GetComponentInChildren<Animator>().enabled = false;
         gamePresentsInstructions.enabled = false;
 
     }
@@ -64,13 +65,14 @@ public class GameM : MonoBehaviour
         //Co-Routine to Disable Game Presents Instructions.. in 6.9 seconds
         if (gameInstructionsBool)
         {
-            StartCoroutine(DisableGamePresentsInstructions(9.4f));
+            StartCoroutine(DisableGamePresentsInstructions(7.9f));
             gameInstructionsBool = false;
         }
         else
         {
-            StopCoroutine(DisableGamePresentsInstructions(0));
-            GameInstruction.Instance.StopAnimatingText();
+        
+            //StopCoroutine(DisableGamePresentsInstructions(0));
+            //GameInstruction.Instance.StopAnimatingText();
         }
     }
 
@@ -79,7 +81,9 @@ public class GameM : MonoBehaviour
     {
         //Waiting time..
         yield return new WaitForSeconds(seconds);
+
         //Disabling TextMesh...
+        GameInstruction.Instance.StopAnimatingText();
         gameInstructions.enabled = false;
         gameInstructionsBool = true;
     }
@@ -89,11 +93,19 @@ public class GameM : MonoBehaviour
         if (gameInstructionsBool)
         {
             yield return new WaitForSeconds(seconds);
-            //Enabling Text Animation;
-            gamePresentsInstructions.enabled = true;
+            //Getting Animator Component from the Game Object;
+            //gameInstructions.GetComponentInChildren<Animator>().enabled = true;
 
+            //Enabling TextMeshPro Text;
+            gamePresentsInstructions.enabled = true;
+            
             yield return new WaitForSeconds(seconds);
+            //Getting Animator Component from the Game Object;
+            //gameInstructions.GetComponentInChildren<Animator>().enabled = false;
+            //Enabling Text Animation;
             gamePresentsInstructions.enabled = false;
+
+            //Setting if statement check variable to false;
             gameInstructionsBool = false;
         }
 
