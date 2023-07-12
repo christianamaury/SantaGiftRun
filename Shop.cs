@@ -32,7 +32,7 @@ public class Shop : MonoBehaviour
     void Start()
     {
         //Getting your coins Reference..
-        coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
+        coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + " " + "coins";
     }
 
     public void BuyHealthPotions()

@@ -36,7 +36,10 @@ public class CurrencySystem : MonoBehaviour
     void Start()
     {
         //Getting your coins Reference..
-        coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
+        coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + " " + "coins";
+
+        //All picked up Coins; 
+        coinsTextTransfer.text = PlayerPrefs.GetInt("Currency", 0).ToString(); 
 
         //Health Potions Available
         healthPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
@@ -54,7 +57,7 @@ public class CurrencySystem : MonoBehaviour
         coinsPickUp = PlayerPrefs.GetInt("Currency", 0);
 
         coinsPickUp = coinsPickUp + 1;
-        coinsText.text = coinsPickUp.ToString() + "c";
+        coinsText.text = coinsPickUp.ToString() + " " + "coins";
         
         if (coinsPickUp > PlayerPrefs.GetInt("Currency", 0))
         {
@@ -62,9 +65,8 @@ public class CurrencySystem : MonoBehaviour
             PlayerPrefs.SetInt("Currency", coinsPickUp);
 
             //Updating Currency text for the player;
-            coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
-
-            coinsTextTransfer.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
+            coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + " " + "coins";
+            coinsTextTransfer.text = PlayerPrefs.GetInt("Currency", 0).ToString();
         }
         
     }
@@ -94,10 +96,10 @@ public class CurrencySystem : MonoBehaviour
             healthPotionsCount.text = PlayerPrefs.GetInt("HealthPotions", 0).ToString();
 
             //Updating TextMesh Object
-            coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
+            coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString() + " " + "coins";
 
             //Transfering Coins
-            coinsTextTransfer.text = PlayerPrefs.GetInt("Currency", 0).ToString() + "c";
+            coinsTextTransfer.text = PlayerPrefs.GetInt("Currency", 0).ToString() + " " + "coins";
 
         }
     }

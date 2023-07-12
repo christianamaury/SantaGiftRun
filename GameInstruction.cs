@@ -23,8 +23,7 @@ public class GameInstruction : MonoBehaviour
     public void StopAnimatingText()
     {
         //Exit out the Text Animation; 
-        //anim.SetTrigger("GameInstructionsExit");
-        anim.SetBool("ExitAnimation", true);
+        anim.SetBool("ExitInstructions", true);
         anim.enabled = false;
     }
 }

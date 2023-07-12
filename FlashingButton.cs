@@ -37,8 +37,7 @@ public class FlashingButton : MonoBehaviour
 
         //Getting Button Image Component from the Button..
         buttonImage = uiButton.GetComponent<Image>();
-        //Getting Button Image Component from the Armor Button;
-   
+    
         //Assigning default color reference from the Image;
         originalColor = buttonImage.color;
       

@@ -51,8 +51,11 @@ public class GameM : MonoBehaviour
         scoreCount.text = score.ToString();
         bestScoreTransfer.text = PlayerPrefs.GetInt("BestScore", 0).ToString();
 
+        //Disabling GPresents TextMesh Animator Componet for now; TESTING*
+        GPresentsInstructions.Instance.anim.enabled = false;
+
         //Co-Routine to Disable Game Text Instructions.. in 4.5 seconds;
-        StartCoroutine(DisableGameTextIntrusctions(4.5f));
+        StartCoroutine(DisableGameTextInstructions(4.5f));
 
         //Game Presents Text TextMeshPro Object is Disabled by Default..
         //gameInstructions.GetComponentInChildren<Animator>().enabled = false;
@@ -77,7 +80,7 @@ public class GameM : MonoBehaviour
     }
 
     //..Disabling Game Intructions Text Mesh in 4.5 seconds;
-    private IEnumerator DisableGameTextIntrusctions(float seconds)
+    private IEnumerator DisableGameTextInstructions(float seconds)
     {
         //Waiting time..
         yield return new WaitForSeconds(seconds);
@@ -86,24 +89,28 @@ public class GameM : MonoBehaviour
         GameInstruction.Instance.StopAnimatingText();
         gameInstructions.enabled = false;
         gameInstructionsBool = true;
+
+        //Enabling GPresents TextMesh Animator Componet for now; TESTING*
+        GPresentsInstructions.Instance.anim.enabled = true;
     }
 
     private IEnumerator DisableGamePresentsInstructions(float seconds)
     {
         if (gameInstructionsBool)
         {
+            //Waiting Initial Seconds;
             yield return new WaitForSeconds(seconds);
-            //Getting Animator Component from the Game Object;
-            //gameInstructions.GetComponentInChildren<Animator>().enabled = true;
-
+          
             //Enabling TextMeshPro Text;
             gamePresentsInstructions.enabled = true;
             
             yield return new WaitForSeconds(seconds);
-            //Getting Animator Component from the Game Object;
-            //gameInstructions.GetComponentInChildren<Animator>().enabled = false;
-            //Enabling Text Animation;
+     
+            //Disabling TextMesh Text Layer;
             gamePresentsInstructions.enabled = false;
+
+            //Disabling TextMesh Text Animation;
+            GPresentsInstructions.Instance.StopTextAnimation();
 
             //Setting if statement check variable to false;
             gameInstructionsBool = false;

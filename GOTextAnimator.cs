@@ -16,7 +16,6 @@ public class GOTextAnimator : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-
         //This would ignore when the game is fully paused;
         anim.updateMode = AnimatorUpdateMode.UnscaledTime;
     }
