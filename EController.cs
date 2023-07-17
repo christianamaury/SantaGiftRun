@@ -10,6 +10,16 @@ public class EController : MonoBehaviour
     private Transform playerTransform;
     private Animator anim;
 
+    //Checking how close is the enemy from the Player in order to play an Audio;
+    private float detectPlayerRadius = 5f;
+
+    //Playing Enemy Sound every 12 seconds as the most..
+    //Initially set to 20f;
+    private float enemySoundCooldown = 18.5f;
+
+    //In order to Timestamp when the audio was last played
+    private float lastTimePlayed = -Mathf.Infinity;
+
     public bool isDamaging = false;
 
     private void Awake()
@@ -38,6 +48,16 @@ public class EController : MonoBehaviour
         anim.SetBool("isWalking", true);
         //Enemy Following Player..
         enemy.SetDestination(playerTransform.position);
+
+        //Checking how far is the Player from the Enemy;
+        float currentDistancePlayer = Vector3.Distance(enemy.transform.position, playerTransform.position);
+
+        //If the enemy is within the area;
+        if (currentDistancePlayer <= detectPlayerRadius && Time.time >= lastTimePlayed + enemySoundCooldown)
+        {
+            AudioManager.Instance.Play("EnemySound");
+            lastTimePlayed = Time.time;
+        }
         
     }
     public void attackingAnimation()
