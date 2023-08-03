@@ -20,6 +20,8 @@ public class MainMenu : MonoBehaviour
     public GameObject rewardsVideoButton;
     public GameObject infoButton;
     public GameObject storeGameButtton;
+    public GameObject restorePurchasesMessage;
+    public GameObject noPurchasesMessages; 
 
     private void Awake()
     {
@@ -31,6 +33,8 @@ public class MainMenu : MonoBehaviour
     {
         infoPanelGameObject.SetActive(false);
         storePanelGameObject.SetActive(false);
+        restorePurchasesMessage.SetActive(false);
+        noPurchasesMessages.SetActive(false);
     }
 
     public void startGame()
@@ -91,9 +95,73 @@ public class MainMenu : MonoBehaviour
         storePanelGameObject.SetActive(false);
     }
 
+    public void showRestorePurchasesMessage()
+    {
+        StartCoroutine(PurchasesRestoreMessage());
+    }
+
+    public  IEnumerator PurchasesRestoreMessage()
+    {
+        yield return new WaitForSeconds(1f);
+        //Showing No Purchases Button;
+        restorePurchasesMessage.SetActive(true);
+
+        //Turning off these buttons..
+        infoPanelGameObject.SetActive(false);
+        playGameButton.SetActive(false);
+        quitGameButton.SetActive(false);
+        tiktokButton.SetActive(false);
+        leaderboardButton.SetActive(false);
+        noAdsButton.SetActive(false);
+        infoButton.SetActive(false);
+        storeGameButtton.SetActive(false);
+        rewardsVideoButton.SetActive(false);
+        storePanelGameObject.SetActive(false);
+
+        yield return new WaitForSeconds(3.2f);
+        //Enabling infoPanel GameObject;
+        infoPanelGameObject.SetActive(true);
+
+        //Disabling No Purchases Button GameObject;
+        restorePurchasesMessage.SetActive(false);
+    }
+
+    public void noPreviousPurchasesMessage()
+    {
+        StartCoroutine(DisablingMenus());
+    }
+
+    private IEnumerator DisablingMenus()
+    {
+        yield return new WaitForSeconds(1f);
+        //Showing No Purchases Button;
+        noPurchasesMessages.SetActive(true);
+
+        //Turning off these buttons..
+        infoPanelGameObject.SetActive(false);
+        playGameButton.SetActive(false);
+        quitGameButton.SetActive(false);
+        tiktokButton.SetActive(false);
+        leaderboardButton.SetActive(false);
+        noAdsButton.SetActive(false);
+        infoButton.SetActive(false);
+        storeGameButtton.SetActive(false);
+        rewardsVideoButton.SetActive(false);
+        storePanelGameObject.SetActive(false);
+
+        yield return new WaitForSeconds(3.2f);
+        //Enabling infoPanel GameObject;
+        infoPanelGameObject.SetActive(true);
+
+        //Disabling No Purchases Button GameObject;
+        noPurchasesMessages.SetActive(false);
+
+
+    }
+
     public void backToMainMenu()
     {
-        //..Putting Sounds here
+        //Putting Sounds here;
         FindObjectOfType<AudioManager>().Play("Click");
 
         //.Turning off the info panel

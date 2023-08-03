@@ -8,6 +8,9 @@ public class StaminaPotion : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
+            //Stamina Potion Sound Effect;
+            AudioManager.Instance.Play("PotionsPickUp");
+
             //..Destroy potion Game Object;
             Destroy(gameObject);
 

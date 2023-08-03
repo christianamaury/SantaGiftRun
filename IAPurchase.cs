@@ -203,22 +203,35 @@ public class IAPurchase : MonoBehaviour, IStoreListener
                 // no purchases are available to be restored.
                 Debug.Log("RestorePurchases continuing: " + result + ". If no further messages, no purchases available to restore.");
 
-
-                //..Restoring Previous Purchases; Custom Method.
-                customerTransaction();
+                if (!result)
+                {
+                    //If not Previous purchases were found;
+                    Debug.Log("No prior Purchases in the system");
+                    MainMenu.Instance.noPreviousPurchasesMessage();
+                }
+                else
+                {
+                    //Prior purchases were Found;
+                    MainMenu.Instance.showRestorePurchasesMessage();
+                    //Restoring.,.
+                    customerTransaction();
+                }
+             
 
             });
         }
 
-
-        // Otherwise ...
+        //Otherwise...
         else
         {
             // We are not running on an Apple device. No work is necessary to restore purchases.
             Debug.Log("RestorePurchases FAIL. Not supported on this platform. Current = " + Application.platform);
+
+            //If not Previous purchases were found;
+            Debug.Log("No prior Purchases in the system");
+            MainMenu.Instance.noPreviousPurchasesMessage();
         }
     }
-
 
     //  
     // --- IStoreListener

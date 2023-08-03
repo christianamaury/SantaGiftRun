@@ -58,7 +58,6 @@ public class GameM : MonoBehaviour
         StartCoroutine(DisableGameTextInstructions(4.5f));
 
         //Game Presents Text TextMeshPro Object is Disabled by Default..
-        //gameInstructions.GetComponentInChildren<Animator>().enabled = false;
         gamePresentsInstructions.enabled = false;
 
     }
@@ -74,8 +73,6 @@ public class GameM : MonoBehaviour
         else
         {
         
-            //StopCoroutine(DisableGamePresentsInstructions(0));
-            //GameInstruction.Instance.StopAnimatingText();
         }
     }
 

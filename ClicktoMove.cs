@@ -12,8 +12,11 @@ public class ClicktoMove : MonoBehaviour
 
     //Movement Started? Purposes..
     public bool startMovement = false;
-
     private Vector3 startTouch;
+
+    //Distance kinda of threshold to be consider from the final Destination;
+    //0.5f; 0.3f;
+    private float stoppingThreshold = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -40,15 +43,31 @@ public class ClicktoMove : MonoBehaviour
                 //Player animation when it start running..
                 anim.SetBool("isRunning", true);
 
-                //Foot Special Sounds..
-                AudioManager.Instance.Play("DeepFootStep");
+                //Play audio sound only if it not playing already
+                
 
                 //Player Destination to the Vector in the Screen
                 agent.SetDestination(hit.point);
+
             }
         }
 
-        
+        //Checking if the player finally made it to the vector destination;
+        if (!agent.pathPending && agent.remainingDistance <= stoppingThreshold)
+        {
+            //Disable animation since the player already the location;
+            anim.SetBool("isRunning", false);
+            //Stop playing Foot Special Sounds;
+            AudioManager.Instance.Stop("DeepFootStep");
+        }
+
+        //..Haven't reach the location yet, keep doing running animation; 
+        else
+        {
+            anim.SetBool("isRunning", true);
+            //Foot Special Sounds..
+            AudioManager.Instance.Play("DeepFootStep");
+        }
     }
 
     private void OnTriggerEnter(Collider col)

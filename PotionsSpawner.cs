@@ -28,7 +28,7 @@ public class PotionsSpawner : MonoBehaviour
 
     IEnumerator RespawnPotions()
     {
-        //..Previous sly 
+        //If the amount of gameObjects potions in the Scene;
         while (potionsCount < 1)
         {
             xPotionsPosition = Random.Range(-14, 14);

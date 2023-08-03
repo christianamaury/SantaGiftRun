@@ -14,8 +14,9 @@ public class EController : MonoBehaviour
     private float detectPlayerRadius = 5f;
 
     //Playing Enemy Sound every 12 seconds as the most..
-    //Initially set to 20f;
-    private float enemySoundCooldown = 18.5f;
+    //Volume Default Sound Range: 0.068
+    //Initially set to 20f; 18.5f;
+    private float enemySoundCooldown = 19.6f;
 
     //In order to Timestamp when the audio was last played
     private float lastTimePlayed = -Mathf.Infinity;

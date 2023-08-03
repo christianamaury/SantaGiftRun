@@ -22,7 +22,10 @@ public class StaminaBar : MonoBehaviour
     //Damage Variables;
     public float damagePerWalk = 0.1f;
     public float testingDamage = 0.02f;
-    public float enemyDamage = 0.01f;
+
+    //This value works fine on the Unity Editor, but it takes too much Damage on Mobile
+    //0.01f;
+    public float enemyDamage = 0.006f;
 
     private void Awake()
     {
@@ -49,6 +52,9 @@ public class StaminaBar : MonoBehaviour
         if(CurrencySystem.Instance.armorCount > 0)
 
         {
+            //Drinking Armor Potion Sound Effect;
+            AudioManager.Instance.Play("PotionsDrink");
+
             maxArmorHealth = maxArmorHealth + armorHealthPoints;
 
             //Updating Armor Bar Health Slide Bar;
@@ -82,6 +88,9 @@ public class StaminaBar : MonoBehaviour
         if(CurrencySystem.Instance.healthCount > 0)
 
         {
+            //Drinking Health Potion Sound Effect;
+            AudioManager.Instance.Play("PotionsDrink");
+            
             maxHealth = maxHealth + healthPoints;
 
             //Updating Health Bar Slider Bar..

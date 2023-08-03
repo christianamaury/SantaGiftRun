@@ -15,7 +15,10 @@ public class HealthPotion : MonoBehaviour
     {
         if(col.gameObject.tag == "Player")
         {
-            //..Destroy potion Game Object;
+            //Health Potion Sound Effect;
+            AudioManager.Instance.Play("PotionsPickUp");
+
+            //Destroy potion Game Object;
             Destroy(gameObject);
 
             CurrencySystem.Instance.healthCount = PlayerPrefs.GetInt("HealthPotions", 0);
