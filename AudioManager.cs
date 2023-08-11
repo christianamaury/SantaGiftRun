@@ -67,7 +67,6 @@ public class AudioManager : MonoBehaviour
         {
             //..No audio under that nama;
             return;
-
         }
 
         //Stop the audio if it's actually playing;
@@ -85,7 +84,6 @@ public class AudioManager : MonoBehaviour
         {
             //..No audio under that nama;
             return false;
-
         }
 
         //Return Value;

@@ -16,7 +16,7 @@ public class ClicktoMove : MonoBehaviour
 
     //Distance kinda of threshold to be consider from the final Destination;
     //0.5f; 0.3f;
-    private float stoppingThreshold = 0.5f;
+    private float stoppingThreshold = 0.2f;
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +44,11 @@ public class ClicktoMove : MonoBehaviour
                 anim.SetBool("isRunning", true);
 
                 //Play audio sound only if it not playing already
-                
+                if (!AudioManager.Instance.isPlaying("SnowFootSteps"))
+                {
+                    //Playing audio
+                    AudioManager.Instance.Play("SnowFootSteps");
+                }
 
                 //Player Destination to the Vector in the Screen
                 agent.SetDestination(hit.point);
@@ -58,39 +62,46 @@ public class ClicktoMove : MonoBehaviour
             //Disable animation since the player already the location;
             anim.SetBool("isRunning", false);
             //Stop playing Foot Special Sounds;
-            AudioManager.Instance.Stop("DeepFootStep");
+            AudioManager.Instance.Stop("SnowFootSteps");
         }
 
-        //..Haven't reach the location yet, keep doing running animation; 
+        //..Haven't reach the location yet, keep doing running animation;
+        //Player is still moving..
         else
         {
             anim.SetBool("isRunning", true);
-            //Foot Special Sounds..
-            AudioManager.Instance.Play("DeepFootStep");
+
+            //Only play audio sound if they're not already playing;
+            if(!AudioManager.Instance.isPlaying("SnowFootSteps"))
+            {
+                //Foot Special Sounds..
+                AudioManager.Instance.Play("SnowFootSteps");
+            }
+       
         }
     }
 
-    private void OnTriggerEnter(Collider col)
-    {
-        if(col.gameObject.tag == "Enemy")
+    //private void OnTriggerEnter(Collider col)
+    //{
+    //    if(col.gameObject.tag == "Enemy")
 
-        {
-            //Play Enemy Attack Animation..
-            EController.Instance.attackingAnimation();
+    //    {
+    //        //Play Enemy Attack Animation..
+    //        EController.Instance.attackingAnimation();
 
-            //Setting Damage on Enemy Health
-            StaminaBar.Instance.attackingPlayer();
-        }
+    //        //Setting Damage on Enemy Health
+    //        StaminaBar.Instance.attackingPlayer();
+    //    }
 
-    }
+    //}
 
-    private void OnTriggerExit(Collider col)
-    {
-        if(col.gameObject.tag == "Enemy")
-        {
-            //When Enemy exit Player collider, stop attack animation..
-            EController.Instance.stoppingAttackAnimation();
-        }
-    }
+    //private void OnTriggerExit(Collider col)
+    //{
+    //    if(col.gameObject.tag == "Enemy")
+    //    {
+    //        //When Enemy exit Player collider, stop attack animation..
+    //        EController.Instance.stoppingAttackAnimation();
+    //    }
+    //}
 
 }

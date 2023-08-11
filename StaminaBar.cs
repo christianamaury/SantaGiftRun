@@ -25,7 +25,7 @@ public class StaminaBar : MonoBehaviour
 
     //This value works fine on the Unity Editor, but it takes too much Damage on Mobile
     //0.01f;
-    public float enemyDamage = 0.006f;
+    public float enemyDamage = 0.05f;
 
     private void Awake()
     {

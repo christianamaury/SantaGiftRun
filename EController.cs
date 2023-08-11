@@ -15,13 +15,14 @@ public class EController : MonoBehaviour
 
     //Playing Enemy Sound every 12 seconds as the most..
     //Volume Default Sound Range: 0.068
-    //Initially set to 20f; 18.5f;
-    private float enemySoundCooldown = 19.6f;
+    //Initially set to 20f; 18.5f;19.6f;, 35.6f;
+    private float enemySoundCooldown = 45.7f;
 
     //In order to Timestamp when the audio was last played
     private float lastTimePlayed = -Mathf.Infinity;
 
     public bool isDamaging = false;
+
 
     private void Awake()
     {
@@ -56,7 +57,13 @@ public class EController : MonoBehaviour
         //If the enemy is within the area;
         if (currentDistancePlayer <= detectPlayerRadius && Time.time >= lastTimePlayed + enemySoundCooldown)
         {
-            AudioManager.Instance.Play("EnemySound");
+            //AudioManager.Instance.Play("EnemySound");
+            if (AudioManager.Instance != null)
+            {
+                //Play Enemy Sound Effect;
+                AudioManager.Instance.Play("EnemySound");
+            }
+
             lastTimePlayed = Time.time;
         }
         

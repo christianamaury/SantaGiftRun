@@ -20,7 +20,7 @@ public class RestartLevel : MonoBehaviour
     void Start()
     {
         playerDiedNumber = 2;
-        playerDiedRandom = Random.Range(1, 4);
+        playerDiedRandom = Random.Range(1, 3);
        
         //Game will be active every single time we start the game;
         Time.timeScale = 1;
